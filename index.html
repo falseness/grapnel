@@ -28,6 +28,7 @@
         <script src = "sides.js"></script>
         
         <script src = "obstacles/generate.js"></script>
+        <script src = "obstacles/delete.js"></script>
         <script src = "moveScreen.js"></script>
         <div id = "container"></div>
         <script>
@@ -99,10 +100,6 @@
                 generateObstacle(x + (obstacleIndent + obstacleWidth) * i)
             }
             
-            for (let i = sides.length; i < sprites.length; ++i)
-            {
-                obstaclesLayer.add(sprites[i].object)
-            }
             
             stage.on('mousedown', function()
             {

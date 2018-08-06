@@ -9,6 +9,7 @@ class Screen
         this.timeCoefficient = 50
         
         
+        
         this.speed = 0
         this.acceleration = 0
         this.primaryDistance = 0
@@ -18,14 +19,8 @@ class Screen
     {
         this.speed += this.acceleration
         
-        if (screen.currentDistance < screen.primaryDistance / 2)
-            screen.acceleration = calcFiniteAcceleration(screen.speed, 0, screen.currentDistance)
-        if (Math.abs(screen.speed) < minimumDeltaRealNumber)
-        {
-            screen.acceleration = 0
-            screen.speed = 0
-            screen.move = 0
-        }
+        this.shouldReCalcAcceleration()
+        this.shouldStopScreen()
         this.moveAllSprites()
     }
     moveAllSprites()
@@ -40,16 +35,37 @@ class Screen
         ninja.x += this.speed
         grapnel.x += this.speed
     }
+    startMove()
+    {
+        this.primaryDistance = ninja.x - this.whereMove
+        this.currentDistance = this.primaryDistance
+        this.acceleration = calcPrimaryAcceleration(this.timeCoefficient, 0, -this.primaryDistance)
+    }
+    shouldStartMoveByGrapnel()
+    {
+        if (ninja.x > this.whenceMove && Math.abs(screen.speed) < minimumDeltaRealNumber)
+            this.startMove()
+    }
+    shouldStartMoveByBarrier()
+    {
+        if (ninja.x > this.lastBarrierMove && Math.abs(screen.speed) < minimumDeltaRealNumber)
+            this.startMove()
+    }
+    shouldReCalcAcceleration()
+    {
+        if (this.currentDistance < this.primaryDistance / 2 && this.acceleration < 0)
+            this.acceleration = calcFiniteAcceleration(this.speed, 0, this.currentDistance)
+    }
+    shouldStopScreen()
+    {
+        if (this.speed > 0)
+        {
+            this.acceleration = 0
+            this.speed = 0
+        }
+    }
 }
 
-function moveScreen()
-{
-    screen.speed += screen.acceleration
-    screen.currentDistance += screen.speed
-    
-    
-    
-}
 function calcFiniteAcceleration(v, v0, s)
 {
     /* s = (v^2 - v0^2) / (2 * a)
@@ -61,22 +77,4 @@ function calcPrimaryAcceleration(t, v0, s)
     /* s = v0 * t + (a * t ^ 2) / 2
     a = 2 * (s - v0 * t) / t ^ 2*/
     return (2 * (s - v0 * t) / Math.pow(t, 2))
-}
-function moveScreenToGrapnel()
-{
-    if (ninja.x > whenceMoveScreen)// && ninja.x > grapnel.x)
-    {
-        screen.primaryDistance = ninja.x - whereMoveScreen
-        screen.currentDistance = screen.primaryDistance
-        screen.acceleration = calcPrimaryAcceleration(screenTimeCoefficient, 0, -screen.primaryDistance)
-    }
-}
-function lastBarrierBehindNinja()
-{
-    if (ninja.x > screen.lastBarrierMoveScreen)
-    {
-        screen.primaryDistance = ninja.x - whereMoveScreen
-        screen.currentDistance = screen.primaryDistance
-        screen.acceleration = calcPrimaryAcceleration(screenTimeCoefficient, 0, -screen.primaryDistance)
-    }
 }

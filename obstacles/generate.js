@@ -18,6 +18,7 @@ function generateObstacle(x)
       strokeWidth: 1,
       closed: true
     })))
+    obstaclesLayer.add(sprites[sprites.length - 1].object)
     sprites.push(new Sprite(new Konva.Line({
       points: generateRectPoints({x: x, y: sides[0].height + obstacleHeight + wayHeight}, 
                                  {width: obstacleWidth, height: (height - sides[0].height - sides[1].height - wayHeight - obstacleHeight)}),
@@ -26,4 +27,5 @@ function generateObstacle(x)
       strokeWidth: 1,
       closed: true
     })))
+    obstaclesLayer.add(sprites[sprites.length - 1].object)
 }

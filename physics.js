@@ -4,8 +4,9 @@ function physics()
 {
     ninja.speedY += gravity
     
+    screen.shouldStartMoveByBarrier()
     screen.move()
-    lastBarrierBehindNinja()
+    
     for (let i = 0; i < sprites.length; ++i)
     {
         sprites[i].move()
@@ -25,5 +26,5 @@ function physics()
         else if (!grapnel.grappled())
             grapnel.collision()
     }
-    
+    deleteObstacles()
 }

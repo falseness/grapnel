@@ -52,7 +52,7 @@ class Grapnel extends Sprite
     {
         this.speedX = 0
         this.speedY = 0
-        moveScreenToGrapnel()
+        screen.shouldStartMoveByGrapnel()
     }
     grappled()
     {
