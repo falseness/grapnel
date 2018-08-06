@@ -4,8 +4,8 @@ function physics()
 {
     ninja.speedY += gravity
     
-    moveScreen()
-    prelastBarrierBehindNinja()
+    screen.move()
+    lastBarrierBehindNinja()
     for (let i = 0; i < sprites.length; ++i)
     {
         sprites[i].move()

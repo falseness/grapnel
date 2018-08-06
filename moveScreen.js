@@ -1,42 +1,54 @@
-const whereMoveScreen = 0.3 * width
-const whenceMoveScreen = 0.5 * width
-
-const prelastBarrierMoveScreen = 0.8 * width
-const lastBarrierMoveScreen = 0.9 * width
-const screenTimeCoefficient = 50
-
-let screen = 
+class Screen
 {
-    speed: 0,
-    acceleration: 0,
-    primaryDistance: 0,
-    currentDistance: 0,
-    move: 0,
+    constructor()
+    {
+        //constants
+        this.whereMove = 0.3 * width
+        this.whenceMove = 0.5 * width
+        this.lastBarrierMove = 0.8 * width
+        this.timeCoefficient = 50
+        
+        
+        this.speed = 0
+        this.acceleration = 0
+        this.primaryDistance = 0
+        this.currentDistance = 0
+    }
+    move()
+    {
+        this.speed += this.acceleration
+        
+        if (screen.currentDistance < screen.primaryDistance / 2)
+            screen.acceleration = calcFiniteAcceleration(screen.speed, 0, screen.currentDistance)
+        if (Math.abs(screen.speed) < minimumDeltaRealNumber)
+        {
+            screen.acceleration = 0
+            screen.speed = 0
+            screen.move = 0
+        }
+        this.moveAllSprites()
+    }
+    moveAllSprites()
+    {
+        this.currentDistance += this.speed
+        
+        for (let i = sides.length; i < sprites.length; ++i)
+        {
+            sprites[i].speedX = this.speed
+        }
+        
+        ninja.x += this.speed
+        grapnel.x += this.speed
+    }
 }
+
 function moveScreen()
 {
     screen.speed += screen.acceleration
     screen.currentDistance += screen.speed
     
-    if (screen.move == 'ninja' && screen.currentDistance < screen.primaryDistance / 2)
-        screen.acceleration = calcFiniteAcceleration(screen.speed, 0, screen.currentDistance)
-    if (screen.speed < -5 && screen.move == 'ninja')
-    {
-        screen.speed = screen.speed
-    }
-    if (Math.abs(screen.speed) < minimumDeltaRealNumber)
-    {
-        screen.acceleration = 0
-        screen.speed = 0
-        screen.move = 0
-    }
-    for (let i = sides.length; i < sprites.length; ++i)
-    {
-        sprites[i].speedX = screen.speed
-    }
-    ninja.x += screen.speed
     
-    grapnel.x += screen.speed
+    
 }
 function calcFiniteAcceleration(v, v0, s)
 {
@@ -57,16 +69,14 @@ function moveScreenToGrapnel()
         screen.primaryDistance = ninja.x - whereMoveScreen
         screen.currentDistance = screen.primaryDistance
         screen.acceleration = calcPrimaryAcceleration(screenTimeCoefficient, 0, -screen.primaryDistance)
-        screen.move = 'ninja'
     }
 }
-function prelastBarrierBehindNinja()
+function lastBarrierBehindNinja()
 {
-    /*if (ninja.x > prelastBarrierMoveScreen)
+    if (ninja.x > screen.lastBarrierMoveScreen)
     {
         screen.primaryDistance = ninja.x - whereMoveScreen
         screen.currentDistance = screen.primaryDistance
-        screen.move = 'prelastBarrier'
         screen.acceleration = calcPrimaryAcceleration(screenTimeCoefficient, 0, -screen.primaryDistance)
-    }*/
+    }
 }
