@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>grapnel ninja</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
         <meta charset = "UTF-8">
         <style>
             body 
@@ -38,6 +39,7 @@
                 width: width,
                 height: height
             })
+            Konva.pixelRatio = 1
             
             let grapnelLayer = new Konva.Layer()
             let ninjaLayer = new Konva.Layer()
@@ -93,6 +95,7 @@
                 lineJoin: 'round'
             }))
             staticLayer.draw()
+            mechanicsLayer.draw()
             
             let x = 0.4 * width
             for (let i = 0; i < 5; ++i)
@@ -120,17 +123,24 @@
             })
             function gameLoop()
             {
-                for (let i = 0; i < cyclesPerTick; ++i)
+                /*for (let i = 0; i < cyclesPerTick; ++i)
                 {
                     physics()
+                }*/
+                physics()
+                if (grapnel.throwed)
+                {
+                    grapnelLayer.visible(true)
+                    grapnelLayer.draw()
                 }
-                grapnelLayer.draw()
+                else
+                    grapnelLayer.visible(false)
                 ninjaLayer.draw()
                 //staticLayer.draw()
-                
+                //mechanicsLayer.draw()
                 obstaclesLayer.draw()
                 
-                mechanicsLayer.draw()
+                
                 
                 requestAnimationFrame(gameLoop)
             }
