@@ -38,21 +38,24 @@ class Grapnel extends Sprite
             {
                 let line = lineFormula(points[j], points[j + 1],
                                 points[j + 2], points[j + 3])
-                if (linesCollision(grapnelLine, line))
-                    this.grapple()
+                this.grapple(linesCollision(grapnelLine, line))
             }
             let line = lineFormula(points[points.length - 2], points[points.length - 1],
                                 points[0], points[1])
-            if (linesCollision(grapnelLine, line))
-                this.grapple()
+            this.grapple(linesCollision(grapnelLine, line))
                 
         }
     }
-    grapple()
+    grapple(coords)
     {
-        this.speedX = 0
-        this.speedY = 0
-        screen.shouldStartMoveByGrapnel()
+        if (coords)
+        {
+            this.x = coords.x
+            this.y = coords.y
+            this.speedX = 0
+            this.speedY = 0
+            screen.shouldStartMoveByGrapnel()
+        }
     }
     grappled()
     {
