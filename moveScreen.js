@@ -3,9 +3,9 @@ class Screen
     constructor()
     {
         //constants
-        this.whereMove = 0.3 * width
-        this.whenceMove = 0.5 * width
-        this.lastBarrierMove = 0.8 * width
+        this.whereMove = 0.2 * width
+        this.whenceMove = 0.35 * width
+        this.lastBarrierMove = 0.6 * width
         this.timeCoefficient = 50
         
         
@@ -48,7 +48,7 @@ class Screen
     }
     shouldStartMoveByBarrier()
     {
-        if (ninja.x > this.lastBarrierMove && Math.abs(screen.speed) < minimumDeltaRealNumber)
+        if (ninja.x > this.lastBarrierMove)// && Math.abs(screen.speed) < minimumDeltaRealNumber)
             this.startMove()
     }
     shouldReCalcAcceleration()
