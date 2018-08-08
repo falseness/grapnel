@@ -11,16 +11,22 @@ class Sprite
         this.height = object.attrs.height
         this.speedX = 0
         this.speedY = 0
+        this.points = object.attrs.points
     }
     move()
     {
-        let points = this.object.attrs.points
+        for (let i = 0; i < this.points.length; i += 2)
+        {
+            this.points[i] += this.speedX
+            this.points[i + 1] += this.speedY
+        }
+        /*let points = this.object.attrs.points
         for (let i = 0; i < points.length; i += 2)
         {
             points[i] += this.speedX
             points[i + 1] += this.speedY
         }
-        this.object.attrs.points = points
+        this.object.attrs.points = points*/
     }
 }
 

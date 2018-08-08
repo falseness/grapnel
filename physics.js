@@ -1,8 +1,8 @@
-const gravity = 0.05
+const GRAVITY = 0.05
 
 function physics()
 {
-    ninja.speedY += gravity
+    ninja.speedY += GRAVITY
     
     screen.shouldStartMoveByBarrier()
     screen.move()

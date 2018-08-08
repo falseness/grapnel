@@ -24,6 +24,7 @@
         <script src = "sprites/sprite.js"></script>
         <script src = "sprites/ninja.js"></script>
         <script src = "sprites/grapnel.js"></script>
+        <script src  ="sprites/create.js"></script>
         
         <script src = "physics.js"></script>
         <script src = "sides.js"></script>
@@ -31,6 +32,11 @@
         <script src = "obstacles/generate.js"></script>
         <script src = "obstacles/delete.js"></script>
         <script src = "moveScreen.js"></script>
+        
+        <script src = "render/layers.js"></script>
+        <script src = "render/draw.js"></script>
+        
+        <script src = "events.js"></script>
         <div id = "container"></div>
         <script>
             'use strict'
@@ -39,88 +45,26 @@
                 width: width,
                 height: height
             })
-            Konva.pixelRatio = 1
-            
-            let grapnelLayer = new Konva.Layer()
-            let ninjaLayer = new Konva.Layer()
-            let staticLayer = new Konva.Layer()
-            let obstaclesLayer = new Konva.Layer()
-            let mechanicsLayer = new Konva.Layer()
-            
-            stage.add(grapnelLayer)
-            stage.add(staticLayer)
-            stage.add(ninjaLayer)
-            stage.add(obstaclesLayer)
-            
-            stage.add(mechanicsLayer)
-            
-            let ninja = new Ninja(new Konva.Circle({
-                x: 0.2 * width,
-                y: 0.2 * height,
-                radius: 10,
-                fill: '#0000ff',
-                stroke: '#000000',
-                strokeWidth: 1
-            }))
-            
-            let grapnel = new Grapnel(new Konva.Line({
-                points: [0, 0, 0, 0],
-                stroke: 'red',
-                strokeWidth: 5,
-                lineJoin: 'round'
-            }))
-            let screen = new Screen()
-            
-            ninjaLayer.add(ninja.object)
-            staticLayer.add(sprites[0].object, sprites[1].object)
-            grapnelLayer.add(grapnel.object)
-            
-            mechanicsLayer.add(new Konva.Line({
-                points: [screen.whereMove, 0.2 * height, screen.whereMove, 0.8 * height],
-                stroke: 'green',
-                strokeWidth: 3,
-                lineJoin: 'round'
-            }))
-            mechanicsLayer.add(new Konva.Line({
-                points: [screen.whenceMove, 0.2 * height, screen.whenceMove, 0.8 * height],
-                stroke: 'green',
-                strokeWidth: 3,
-                lineJoin: 'round',
-                opacity: 0.5
-            }))
-            mechanicsLayer.add(new Konva.Line({
-                points: [screen.lastBarrierMove, 0.2 * height, screen.lastBarrierMove, 0.8 * height],
-                stroke: 'green',
-                strokeWidth: 5,
-                lineJoin: 'round'
-            }))
-            staticLayer.draw()
-            mechanicsLayer.draw()
-            
-            let x = 0.4 * width
-            for (let i = 0; i < 5; ++i)
+            window.onload = startGame()
+            function startGame()
             {
-                generateObstacle(x + (obstacleIndent + obstacleWidth) * i)
+                Konva.pixelRatio = 1
+                
+                addLayersToStage()
+                addSpritesToLayers()
+                
+                drawMechanicsLines()
+                drawStaticLayers()
+                
+                
+                generatePrimaryObstacles()
+                
+                createEvents()
+                
+                startDrawAnimations()
+                requestAnimationFrame(gameLoop)
             }
-            
-            
-            stage.on('mousedown', function()
-            {
-                if (grapnel.throwed)
-                {
-                    grapnel.x = NaN
-                    grapnel.y = NaN
-                }
-                else
-                {
-                    grapnel.x = ninja.x
-                    grapnel.y = ninja.y
-                    let ratio = grapnel.calcSpeed(stage.getPointerPosition())
-                    grapnel.speedY = ratio.sin * grapnelSpeed
-                    grapnel.speedX = ratio.cos * grapnelSpeed
-                }
-                grapnel.throwed = !grapnel.throwed
-            })
+
             function gameLoop()
             {
                 /*for (let i = 0; i < cyclesPerTick; ++i)
@@ -128,23 +72,26 @@
                     physics()
                 }*/
                 physics()
-                if (grapnel.throwed)
+                /*if (grapnel.throwed)
                 {
-                    grapnelLayer.visible(true)
-                    grapnelLayer.draw()
+                    layer.grapnel.visible(true)
+                    layer.grapnel.draw()
                 }
                 else
-                    grapnelLayer.visible(false)
-                ninjaLayer.draw()
+                    layer.grapnel.visible(false)*/
+                
+                //ninjaLayer.draw()
+                
                 //staticLayer.draw()
                 //mechanicsLayer.draw()
-                obstaclesLayer.draw()
-                
+                //layer.obstacles.draw()
                 
                 
                 requestAnimationFrame(gameLoop)
             }
-            requestAnimationFrame(gameLoop)
+            
+            
+            
         </script>
     </body>
 </html>

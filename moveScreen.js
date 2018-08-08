@@ -66,6 +66,8 @@ class Screen
     }
 }
 
+let screen = new Screen()
+
 function calcFiniteAcceleration(v, v0, s)
 {
     /* s = (v^2 - v0^2) / (2 * a)
@@ -78,3 +80,4 @@ function calcPrimaryAcceleration(t, v0, s)
     a = 2 * (s - v0 * t) / t ^ 2*/
     return (2 * (s - v0 * t) / Math.pow(t, 2))
 }
+

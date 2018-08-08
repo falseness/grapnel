@@ -37,7 +37,7 @@ class Ninja extends Sprite
     {
         this.x += this.speedX
         this.y += this.speedY
-        this.object.setX(Math.floor(this.x))
-        this.object.setY(Math.floor(this.y))
+        /*this.object.setX(Math.floor(this.x))
+        this.object.setY(Math.floor(this.y))*/
     }
 }

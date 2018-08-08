@@ -14,7 +14,6 @@ class Grapnel extends Sprite
         {
             this.x += this.speedX
             this.y += this.speedY
-            this.object.attrs.points = [Math.floor(ninja.x), Math.floor(ninja.y), Math.floor(this.x), Math.floor(this.y)]
         }
     }
     calcSpeed(direction)

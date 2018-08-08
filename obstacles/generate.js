@@ -3,6 +3,10 @@ const obstacleWidth = 0.05 * width
 
 const obstacleIndent = 0.3 * width
 
+const obstaclePairNumber = 5
+
+const firstObstacleX = 0.4 * width
+
 function generateRectPoints(point, size)
 {
     return [point.x, point.y, point.x + size.width, point.y, 
@@ -18,7 +22,7 @@ function generateObstacle(x)
       strokeWidth: 1,
       closed: true
     })))
-    obstaclesLayer.add(sprites[sprites.length - 1].object)
+    layer.obstacles.add(sprites[sprites.length - 1].object)
     sprites.push(new Sprite(new Konva.Line({
       points: generateRectPoints({x: x, y: sides[0].height + obstacleHeight + wayHeight}, 
                                  {width: obstacleWidth, height: (height - sides[0].height - sides[1].height - wayHeight - obstacleHeight)}),
@@ -27,5 +31,13 @@ function generateObstacle(x)
       strokeWidth: 1,
       closed: true
     })))
-    obstaclesLayer.add(sprites[sprites.length - 1].object)
+    layer.obstacles.add(sprites[sprites.length - 1].object)
+}
+
+function generatePrimaryObstacles()
+{
+    for (let i = 0; i < obstaclePairNumber; ++i)
+    {
+        generateObstacle(firstObstacleX + (obstacleIndent + obstacleWidth) * i)
+    }
 }
