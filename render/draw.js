@@ -32,21 +32,21 @@ function drawMechanicsLines()
     }
     let mechanics = 
     [
-        {
+        /*{
             points: [screen.whereMove, 0.2 * height, screen.whereMove, 0.8 * height],
             strokeWidth: 3,
             opacity: 1
-        },
+        },*/
         {
             points: [screen.whenceMove, 0.2 * height, screen.whenceMove, 0.8 * height],
             strokeWidth: 3,
             opacity: 0.5
-        },
+        }/*,
         {
             points: [screen.lastBarrierMove, 0.2 * height, screen.lastBarrierMove, 0.8 * height],
             strokeWidth: 5,
             opacity: 1
-        }
+        }*/
     ]
     for (let i = 0; i < mechanics.length; ++i)
     {

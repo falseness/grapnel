@@ -14,7 +14,7 @@ class Ninja extends Sprite
             for (let i = 0; i < points.length; i += 2)
             {
                 if (this.collisionNinjaWithLine(points[i], points[i + 1], points[i + 2], points[i + 3]))
-                    console.log('collisiont')
+                    console.log('collision')
             }
             if (this.collisionNinjaWithLine(points[points.length - 2], points[points.length - 1], points[0], points[1]))
                 console.log('collision')

@@ -19,8 +19,8 @@ class Screen
     {
         this.speed += this.acceleration
         
-        this.shouldReCalcAcceleration()
-        this.shouldStopScreen()
+        //this.shouldReCalcAcceleration()
+        //this.shouldStopScreen()
         this.moveAllSprites()
     }
     moveAllSprites()
@@ -35,7 +35,14 @@ class Screen
         ninja.x += this.speed
         grapnel.x += this.speed
     }
-    startMove()
+    shouldStartMove()
+    {
+        if (ninja.x > this.whenceMove && ninja.speedX > 0)
+            this.speed = -ninja.speedX
+        else
+            this.speed = 0
+    }
+    /*startMove()
     {
         this.primaryDistance = ninja.x - this.whereMove
         this.currentDistance = this.primaryDistance
@@ -63,7 +70,7 @@ class Screen
             this.acceleration = 0
             this.speed = 0
         }
-    }
+    }*/
 }
 
 let screen = new Screen()
