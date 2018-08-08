@@ -1,6 +1,6 @@
 function createEvents()
 {
-    stage.on('mousedown', function()
+    function throwGrapnel()
     {
         if (grapnel.throwed)
         {
@@ -16,5 +16,8 @@ function createEvents()
             grapnel.speedX = ratio.cos * grapnelSpeed
         }
         grapnel.throwed = !grapnel.throwed
-    })
+    }
+    stage.on('mousedown', throwGrapnel)
+    
+    stage.on('tap', throwGrapnel)
 }
