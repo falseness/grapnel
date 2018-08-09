@@ -2,8 +2,8 @@ let draw =
 {
     ninja: new Konva.Animation(function(frame) 
     {
-        ninja.object.setX(ninja.x)
-        ninja.object.setY(ninja.y)
+        ninja.object.setX(Math.floor(ninja.x))
+        ninja.object.setY(Math.floor(ninja.y))
     }, layer.ninja),
     grapnel: new Konva.Animation(function(frame)
     {
@@ -14,7 +14,7 @@ let draw =
     {
         for (let i = sides.length; i < sprites.length; ++i)
         {
-            sprites[i].object.points(sprites[i].points)
+            sprites[i].object.points = floorPoints(sprites[i].points)
         }
     }, layer.obstacles)
 }
@@ -38,7 +38,7 @@ function drawMechanicsLines()
             opacity: 1
         },*/
         {
-            points: [screen.whenceMove, 0.2 * height, screen.whenceMove, 0.8 * height],
+            points: floorPoints([screen.whenceMove, 0.2 * height, screen.whenceMove, 0.8 * height]),
             strokeWidth: 3,
             opacity: 0.5
         }/*,

@@ -17,6 +17,7 @@ function createEvents()
         
         grapnel.throwed = false
     }
+    
     stage.on('mousedown', throwGrapnel)
     stage.on('mouseup', pickUpGrapnel)
     
