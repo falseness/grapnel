@@ -8,12 +8,16 @@ function createEvents()
         grapnel.speedY = ratio.sin * grapnelSpeed
         grapnel.speedX = ratio.cos * grapnelSpeed
         
+        layer.grapnel.add(grapnel.object)        
+        
         grapnel.throwed = true
     }
     function pickUpGrapnel()
     {
-        grapnel.x = NaN
-        grapnel.y = NaN
+        //grapnel.x = NaN
+        //grapnel.y = NaN
+        
+        grapnel.object.remove()
         
         grapnel.throwed = false
     }

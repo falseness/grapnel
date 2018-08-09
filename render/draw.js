@@ -8,13 +8,13 @@ let draw =
     grapnel: new Konva.Animation(function(frame)
     {
         grapnel.object.points(
-            [Math.floor(ninja.x), Math.floor(ninja.y), Math.floor(grapnel.x), Math.floor(grapnel.y)])
+            floorPoints([ninja.x, ninja.y, grapnel.x, grapnel.y]))
     }, layer.grapnel),
     obstacles: new Konva.Animation(function(frame)
     {
         for (let i = sides.length; i < sprites.length; ++i)
         {
-            sprites[i].object.points = floorPoints(sprites[i].points)
+            sprites[i].object.points(floorPoints(sprites[i].points))
         }
     }, layer.obstacles)
 }
