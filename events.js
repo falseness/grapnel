@@ -2,22 +2,24 @@ function createEvents()
 {
     function throwGrapnel()
     {
-        if (grapnel.throwed)
-        {
-            grapnel.x = NaN
-            grapnel.y = NaN
-        }
-        else
-        {
-            grapnel.x = ninja.x
-            grapnel.y = ninja.y
-            let ratio = grapnel.calcSpeed(stage.getPointerPosition())
-            grapnel.speedY = ratio.sin * grapnelSpeed
-            grapnel.speedX = ratio.cos * grapnelSpeed
-        }
-        grapnel.throwed = !grapnel.throwed
+        grapnel.x = ninja.x
+        grapnel.y = ninja.y
+        let ratio = grapnel.calcSpeed(stage.getPointerPosition())
+        grapnel.speedY = ratio.sin * grapnelSpeed
+        grapnel.speedX = ratio.cos * grapnelSpeed
+        
+        grapnel.throwed = true
+    }
+    function pickUpGrapnel()
+    {
+        grapnel.x = NaN
+        grapnel.y = NaN
+        
+        grapnel.throwed = false
     }
     stage.on('mousedown', throwGrapnel)
+    stage.on('mouseup', pickUpGrapnel)
     
-    stage.on('tap', throwGrapnel)
+    stage.on('touchstart', throwGrapnel)
+    stage.on('touchend', pickUpGrapnel)
 }

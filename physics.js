@@ -1,4 +1,4 @@
-const GRAVITY = 0.05
+const GRAVITY = 0.00006297229219143577 * height
 
 function physics()
 {
@@ -30,3 +30,17 @@ function physics()
     }
     deleteObstacles()
 }
+
+/*
+function calcFiniteAcceleration(v, v0, s)
+{
+    // s = (v^2 - v0^2) / (2 * a)
+    //a = (v^2 - v0^2) / (2 * s)
+    return ((Math.pow(v, 2) - Math.pow(v0, 2)) / (2 * s))
+}
+function calcPrimaryAcceleration(t, v0, s)
+{
+    // s = v0 * t + (a * t ^ 2) / 2
+    // a = 2 * (s - v0 * t) / t ^ 2
+    return (2 * (s - v0 * t) / Math.pow(t, 2))
+}*/

@@ -1,5 +1,5 @@
-const grapnelSpeed = 15
-const grappleSpeed = 0.2
+const grapnelSpeed = 0.018891687657430732 * height
+const grappleSpeed = 0.00025188916876574307 * height
 
 class Grapnel extends Sprite
 {
