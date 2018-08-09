@@ -4,7 +4,11 @@ function deleteObstacles()
     {
         if (obstacleNotOnMap(sprites[i].object.attrs.points))
         {
+            sprites[i].object.destroy()
+            sprites[i + 1].object.destroy()
             sprites.splice(i, 2)
+            //obstacles идут парами 
+            
             generateObstacle(sprites[sprites.length - 1].points[0] + (obstacleIndent + obstacleWidth))
         }
     }
