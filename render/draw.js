@@ -71,9 +71,12 @@ function drawMechanicsLines()
         }))
     }
 }
+
 function startDrawAnimations()
 {
     drawObstaclesFirstTime()
+    layer.scoreText.draw()
+    
     for (i in draw)
     {
         draw[i].start()

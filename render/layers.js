@@ -5,7 +5,8 @@ let layer =
     static: new Konva.Layer(),
     obstacles: new Konva.Layer(),
     ninja: new Konva.Layer(),
-    mechanics: new Konva.Layer()
+    mechanics: new Konva.Layer(),
+    scoreText: new Konva.Layer()
 }
 
 function addLayersToStage()
@@ -20,5 +21,7 @@ function addSpritesToLayers()
     layer.ninja.add(ninja.object)
     layer.static.add(sprites[0].object, sprites[1].object)
     layer.grapnel.add(grapnel.object)
+    
+    layer.scoreText.add(scoreText)
 }
 

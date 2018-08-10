@@ -13,6 +13,16 @@ let grapnel = new Grapnel(new Konva.Line({
     lineJoin: 'round'
 }))
 
+let scoreText = new Konva.Text({
+        x: Math.floor(0.1 * width),
+        y: Math.floor(0.02 * height),
+        text: 'score: 0',
+        fontSize: Math.floor(0.05 * height),
+        fontFamily: 'Calibri',
+        fill: 'blue'
+    })
+scoreText.count = 0
+
 let objectsColor = '#f0f0f0'
 
 let sides = 

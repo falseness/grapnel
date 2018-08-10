@@ -10,6 +10,8 @@ function deleteObstacles()
             //obstacles идут парами 
             
             generateObstacle(sprites[sprites.length - 1].points[0] + (obstacleIndent + obstacleWidth))
+            
+            changeScoreText()
         }
     }
 }
@@ -21,4 +23,10 @@ function obstacleNotOnMap(points)
             return false
     }
     return true
+}
+
+function changeScoreText()
+{
+    scoreText.setText('score: ' + ++scoreText.count)
+    layer.scoreText.draw()
 }
