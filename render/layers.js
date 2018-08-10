@@ -22,6 +22,8 @@ function addSpritesToLayers()
     layer.static.add(sprites[0].object, sprites[1].object)
     layer.grapnel.add(grapnel.object)
     
+    layer.obstacles.add(obstacles)
+    
     layer.scoreText.add(scoreText)
 }
 

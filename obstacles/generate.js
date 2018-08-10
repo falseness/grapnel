@@ -15,15 +15,16 @@ function generateRectPoints(point, size)
 function generateObstacle(x)
 {
     let obstacleHeight = Math.floor(Math.random() * ((height - sides[1].height - sides[0].height - wayHeight) - 0)) + 0
-    sprites.push(new Sprite(new Konva.Line({
+    sprites.push(new Obstacle(new Konva.Line({
       points: generateRectPoints({x: x, y: sides[0].height}, {width: obstacleWidth, height: obstacleHeight}),
       fill: objectsColor,
       stroke: 'black',
       strokeWidth: 1,
       closed: true
     })))
-    layer.obstacles.add(sprites[sprites.length - 1].object)
-    sprites.push(new Sprite(new Konva.Line({
+    //layer.obstacles.add(sprites[sprites.length - 1].object)
+    obstacles.add(sprites[sprites.length - 1].object)
+    sprites.push(new Obstacle(new Konva.Line({
       points: generateRectPoints({x: x, y: sides[0].height + obstacleHeight + wayHeight}, 
                                  {width: obstacleWidth, height: (height - sides[0].height - sides[1].height - wayHeight - obstacleHeight)}),
       fill: objectsColor,
@@ -31,7 +32,8 @@ function generateObstacle(x)
       strokeWidth: 1,
       closed: true
     })))
-    layer.obstacles.add(sprites[sprites.length - 1].object)
+    //layer.obstacles.add(sprites[sprites.length - 1].object)
+    obstacles.add(sprites[sprites.length - 1].object)
 }
 
 function generatePrimaryObstacles()

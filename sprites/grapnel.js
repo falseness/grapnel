@@ -34,7 +34,7 @@ class Grapnel extends Sprite
                                 this.object.attrs.points[2], this.object.attrs.points[3])
         for (let i = 0; i < sprites.length; ++i)
         {
-            let points = sprites[i].object.attrs.points
+            let points = sprites[i].points
             
             for (let j = 0; j <= points.length / 2; j += 2)
             {

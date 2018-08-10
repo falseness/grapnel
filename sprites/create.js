@@ -23,6 +23,14 @@ let scoreText = new Konva.Text({
     })
 scoreText.count = 0
 
+var obstacles = new Konva.Group(
+{
+    x: 0,
+    y: 0,
+    rotation: 0
+})
+obstacles.posX = 0
+ 
 let objectsColor = '#f0f0f0'
 
 let sides = 

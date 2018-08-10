@@ -15,10 +15,11 @@ let draw =
         if (!screen.speed)
             return false
         
-        for (let i = sides.length; i < sprites.length; ++i)
+        /*for (let i = sides.length; i < sprites.length; ++i)
         {
             sprites[i].object.points(floorPoints(sprites[i].points))
-        }
+        }*/
+        obstacles.setX(obstacles.posX)
     }, layer.obstacles)
 }
 function drawStaticLayers()
@@ -28,10 +29,10 @@ function drawStaticLayers()
 }
 function drawObstaclesFirstTime()
 {
-    for (let i = sides.length; i < sprites.length; ++i)
+    /*for (let i = sides.length; i < sprites.length; ++i)
     {
         sprites[i].object.points(floorPoints(sprites[i].points))
-    }
+    }*/
     layer.obstacles.draw()
 }
 function drawMechanicsLines()

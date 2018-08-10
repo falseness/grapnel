@@ -15,6 +15,7 @@ class Screen
         {
             sprites[i].speedX = this.speed
         }
+        obstacles.posX += this.speed
         
         ninja.x += this.speed
         grapnel.x += this.speed

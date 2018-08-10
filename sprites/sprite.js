@@ -11,7 +11,8 @@ class Sprite
         this.height = object.attrs.height
         this.speedX = 0
         this.speedY = 0
-        this.points = object.attrs.points
+        if (object.className == "Line")
+            this.points = object.attrs.points.slice(0, object.attrs.points.length)
     }
     move()
     {
@@ -29,4 +30,5 @@ class Sprite
         this.object.attrs.points = points*/
     }
 }
+
 

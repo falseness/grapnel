@@ -2,14 +2,14 @@ function deleteObstacles()
 {
     for (let i = sides.length; i < sprites.length; ++i)
     {
-        if (obstacleNotOnMap(sprites[i].object.attrs.points))
+        if (obstacleNotOnMap(sprites[i].points))
         {
             sprites[i].object.destroy()
             sprites[i + 1].object.destroy()
             sprites.splice(i, 2)
             //obstacles идут парами 
             
-            generateObstacle(sprites[sprites.length - 1].points[0] + (obstacleIndent + obstacleWidth))
+            generateObstacle(sprites[sprites.length - 1].object.attrs.points[0] + (obstacleIndent + obstacleWidth))
             
             changeScoreText()
         }
