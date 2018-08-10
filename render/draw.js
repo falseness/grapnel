@@ -12,6 +12,9 @@ let draw =
     }, layer.grapnel),
     obstacles: new Konva.Animation(function(frame)
     {
+        if (!screen.speed)
+            return false
+        
         for (let i = sides.length; i < sprites.length; ++i)
         {
             sprites[i].object.points(floorPoints(sprites[i].points))
@@ -22,6 +25,14 @@ function drawStaticLayers()
 {
     layer.static.draw()
     layer.mechanics.draw()
+}
+function drawObstaclesFirstTime()
+{
+    for (let i = sides.length; i < sprites.length; ++i)
+    {
+        sprites[i].object.points(floorPoints(sprites[i].points))
+    }
+    layer.obstacles.draw()
 }
 function drawMechanicsLines()
 {
@@ -62,6 +73,7 @@ function drawMechanicsLines()
 }
 function startDrawAnimations()
 {
+    drawObstaclesFirstTime()
     for (i in draw)
     {
         draw[i].start()
