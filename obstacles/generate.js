@@ -3,7 +3,7 @@ const obstacleWidth = 0.05 * width
 
 const obstacleIndent = 0.3 * width
 
-const obstaclePairNumber = 5
+const obstaclePairNumber = 3
 
 const firstObstacleX = 0.4 * width
 
