@@ -24,18 +24,21 @@
         <script src = "collision/linewithline.js"></script>
         
         <script src = "sprites/sprite.js"></script>
+        <script src = "sprites/element.js"></script>
         <script src = "sprites/ninja.js"></script>
         <script src = "sprites/grapnel.js"></script>
         <script src = "sprites/create.js"></script>
         <script src = "sprites/obstacle.js"></script>
         <script src = "sprites/enemy.js"></script>
+        <script src = "sprites/trampoline.js"></script>
         
         <script src = "physics.js"></script>
         
         <script src = "obstacles/generate.js"></script>
-        <script src = "obstacles/delete.js"></script>
         
         <script src = "enemies/generate.js"></script>
+        
+        <script src = "trampoline/generate.js"></script>
         
         <script src = "elements/generate.js"></script>
         <script src = "elements/delete.js"></script>
@@ -81,11 +84,10 @@
                 scoreText.setText('score: ' + scoreText.count)
                 layer.scoreText.draw()
                 
-                obstacles.posX = 0
-                obstacles.setX(obstacles.posX)
-                
-                enemies.posX = 0
-                enemies.setX(enemies.posX)
+                deltaX = 0
+                obstacles.setX(deltaX)
+                enemies.setX(deltaX)
+                trampolines.setX(deltaX)
                 
                 generatePrimaryElements()
                 drawElementsFirstTime()

@@ -29,14 +29,3 @@ function generateObstacle(x, group)
     let generatedElementsNumber = 2
     return generatedElementsNumber
 }
-
-/*function generatePrimaryObstacles()
-{
-    const firstObstacleX = 0.4 * width
-    const obstaclePairNumber = 5
-    
-    for (let i = 0; i < obstaclePairNumber; ++i)
-    {
-        generateObstacle(firstObstacleX + (obstacleIndent + obstacleWidth) * i, group)
-    }
-}*/

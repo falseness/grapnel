@@ -11,13 +11,13 @@ class Ninja extends Sprite
         for (let i = 0; i < sprites.length; ++i)
         {
             let points = sprites[i].points
-            for (let i = 0; i < points.length; i += 2)
+            for (let j = 0; j < points.length; j += 2)
             {
-                if (this.collisionNinjaWithLine(points[i], points[i + 1], points[i + 2], points[i + 3]))
-                    reStart()
+                if (this.collisionNinjaWithLine(points[j], points[j + 1], points[j + 2], points[j + 3]))
+                    sprites[i].collision(this, lineFormula(points[j], points[j + 1], points[j + 2], points[j + 3]))
             }
             if (this.collisionNinjaWithLine(points[points.length - 2], points[points.length - 1], points[0], points[1]))
-                reStart()
+                sprites[i].collision(this, lineFormula(points[points.length - 2], points[points.length - 1], points[0], points[1]))
           /* if (this.collisionNinjaWithLine(sprites[i].x, sprites[i].y, 
                                            sprites[i].x + sprites[i].width, sprites[i].y) ||
                 this.collisionNinjaWithLine(sprites[i].x, sprites[i].y + sprites[i].height,

@@ -19,7 +19,7 @@ let draw =
         {
             sprites[i].object.points(floorPoints(sprites[i].points))
         }*/
-        obstacles.setX(obstacles.posX)
+        obstacles.setX(deltaX)
     }, layer.obstacles),
     enemies: new Konva.Animation(function(frame)
     {
@@ -27,8 +27,12 @@ let draw =
         {
             sprites[i].moveObject()
         }
-        enemies.setX(enemies.posX)
-    }, layer.enemies)
+        enemies.setX(deltaX)
+    }, layer.enemies),
+    trampolines: new Konva.Animation(function(frame)
+    {
+        trampolines.setX(deltaX)
+    }, layer.trampolines)
 }
 function drawStaticLayers()
 {

@@ -33,6 +33,10 @@ class Sprite
     {
         
     }
+    collision()
+    {
+        reStart()
+    }
 }
 
 

@@ -23,13 +23,15 @@ let scoreText = new Konva.Text({
     })
 scoreText.count = 0
 
+
+let deltaX = 0
+
 let obstacles = new Konva.Group(
 {
     x: 0,
     y: 0,
     rotation: 0
 })
-obstacles.posX = 0
 
 let enemies = new Konva.Group(
 {
@@ -37,20 +39,26 @@ let enemies = new Konva.Group(
     y: 0,
     rotation: 0
 })
-enemies.posX = 0
+
+let trampolines = new Konva.Group(
+{
+    x: 0,
+    y: 0,
+    rotation: 0
+})
 
 let sides = 
 [
     {
-        x: 0, 
+        x: -width, 
         y: 0, 
-        width: width, 
+        width: 3 * width, 
         height: 0.1 * height
     },
     {
-        x: 0, 
+        x: -width, 
         y: 0.9 * height, 
-        width: width,
+        width: 3 * width,
         height: 0.1 * height
     }
 ]

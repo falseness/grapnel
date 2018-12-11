@@ -2,8 +2,9 @@ function generate(x)
 {
     const generateChancePercent = 
     {
-        obstacles: 60,
-        enemies: 40
+        obstacles: 40,
+        enemies: 35,
+        trampolines: 25
     }
     let num = random()
     
@@ -17,6 +18,12 @@ function generate(x)
              num < generateChancePercent.obstacles + generateChancePercent.enemies)
     {
         let generatedElementsNumber = generateEnemy(x, enemies)
+        return generatedElementsNumber
+    }
+    if (generateChancePercent.obstacles + generateChancePercent.enemies <= num &&
+        generateChancePercent.obstacles + generateChancePercent.enemies + generateChancePercent.trampolines)
+    {
+        let generatedElementsNumber = generateTrampoline(x, trampolines)
         return generatedElementsNumber
     }
     console.log("Error generate")

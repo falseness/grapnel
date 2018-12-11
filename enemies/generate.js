@@ -1,10 +1,10 @@
-const length = height * 0.2
+const length = height * 0.15
 const enemyRestriction = 
 {
     top: sides[0].y + sides[0].height + length * Math.cos(Math.PI / 6) + 0.01 * height,
     bottom: sides[1].y - 0.01 * height
 }
-function getTrianglePoints(x, y)
+function generateTrianglePoints(x, y)
 {
     const pointsRectangleTemplate = [0, 0, -length * Math.sin(Math.PI / 6), -length * Math.cos(Math.PI / 6),
                                      length * Math.sin(Math.PI / 6), -length * Math.cos(Math.PI / 6)]
@@ -26,7 +26,7 @@ function generateEnemy(x, group)
         strokeWidth: 1
     }
     
-    enemyModel.points = getTrianglePoints(x, random(enemyRestriction.top, enemyRestriction.bottom))
+    enemyModel.points = generateTrianglePoints(x, random(enemyRestriction.top, enemyRestriction.bottom))
     
     sprites.push(new Enemy(getObject(enemyModel)))
     if (random() < 50)
