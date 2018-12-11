@@ -18,6 +18,8 @@
     <body>
         <script src = "gameoptions.js"></script>
         
+        <script src = "createObjectsByModel/createLineObject.js"></script>
+        
         <script src = "collision/circlewithline.js"></script>
         <script src = "collision/linewithline.js"></script>
         
@@ -26,11 +28,18 @@
         <script src = "sprites/grapnel.js"></script>
         <script src = "sprites/create.js"></script>
         <script src = "sprites/obstacle.js"></script>
+        <script src = "sprites/enemy.js"></script>
         
         <script src = "physics.js"></script>
         
         <script src = "obstacles/generate.js"></script>
         <script src = "obstacles/delete.js"></script>
+        
+        <script src = "enemies/generate.js"></script>
+        
+        <script src = "elements/generate.js"></script>
+        <script src = "elements/delete.js"></script>
+        
         <script src = "moveScreen.js"></script>
         
         <script src = "render/layers.js"></script>
@@ -45,7 +54,11 @@
                 width: width,
                 height: height
             })
+            
             window.onload = startGame()
+            
+            
+            
             function reStart()
             {
                 grapnel.x = NaN
@@ -71,8 +84,11 @@
                 obstacles.posX = 0
                 obstacles.setX(obstacles.posX)
                 
-                generatePrimaryObstacles()
-                drawObstaclesFirstTime()
+                enemies.posX = 0
+                enemies.setX(enemies.posX)
+                
+                generatePrimaryElements()
+                drawElementsFirstTime()
             }
             function startGame()
             {
@@ -85,36 +101,25 @@
                 drawStaticLayers()
                 
                 
-                generatePrimaryObstacles()
+                generatePrimaryElements()
                 
                 createEvents()
                 
                 startDrawAnimations()
                 
+                
+                /*ninjaAnim = new Konva.Animation(function(frame)
+                {
+                    ninja.move()
+                    ninja.collision()
+                }, layer.ninja)*/
                 requestAnimationFrame(gameLoop)
             }
 
             function gameLoop()
             {
-                /*for (let i = 0; i < cyclesPerTick; ++i)
-                {
-                    physics()
-                }*/
                 physics()
-                /*if (grapnel.throwed)
-                {
-                    layer.grapnel.visible(true)
-                    layer.grapnel.draw()
-                }
-                else
-                    layer.grapnel.visible(false)*/
-                
-                //ninjaLayer.draw()
-                
-                //staticLayer.draw()
-                //mechanicsLayer.draw()
-                //layer.obstacles.draw()
-                
+
                 
                 requestAnimationFrame(gameLoop)
             }

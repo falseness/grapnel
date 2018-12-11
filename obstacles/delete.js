@@ -1,15 +1,13 @@
-function deleteObstacles()
+function deleteObstacles(group)
 {
-    for (let i = sides.length; i < sprites.length; ++i)
+    newElements = 0
+    for (let i = sides.length; i < sprites.length - newElements; ++i)
     {
         if (obstacleNotOnMap(sprites[i].points))
         {
-            sprites[i].object.destroy()
-            sprites[i + 1].object.destroy()
-            sprites.splice(i, 2)
-            //obstacles идут парами 
+            sprites[i].delete(i, sprites)
             
-            generateObstacle(sprites[sprites.length - 1].object.attrs.points[0] + (obstacleIndent + obstacleWidth))
+            newElements += generateObstacle(sprites[sprites.length - 1].object.attrs.points[0] + (obstacleIndent + obstacleWidth), group)
             
             changeScoreText()
         }

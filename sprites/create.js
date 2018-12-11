@@ -23,15 +23,21 @@ let scoreText = new Konva.Text({
     })
 scoreText.count = 0
 
-var obstacles = new Konva.Group(
+let obstacles = new Konva.Group(
 {
     x: 0,
     y: 0,
     rotation: 0
 })
 obstacles.posX = 0
- 
-let objectsColor = '#f0f0f0'
+
+let enemies = new Konva.Group(
+{
+    x: 0,
+    y: 0,
+    rotation: 0
+})
+enemies.posX = 0
 
 let sides = 
 [
@@ -50,12 +56,13 @@ let sides =
 ]
 for (let i = 0; i < sides.length; ++i)
 {
+    const sidesColor = '#f0f0f0'
     sprites.push(new Sprite(new Konva.Line({
       points: floorPoints([sides[i].x, sides[i].y, 
               sides[i].x + sides[i].width, sides[i].y, 
               sides[i].x + sides[i].width, sides[i].y + sides[i].height,
               sides[i].x, sides[i].y + sides[i].height]),
-      fill: objectsColor,
+      fill: sidesColor,
       stroke: 'black',
       strokeWidth: 1,
       closed: true

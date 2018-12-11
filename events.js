@@ -5,12 +5,13 @@ function createEvents()
         grapnel.x = ninja.x
         grapnel.y = ninja.y
         let ratio = grapnel.calcSpeed(stage.getPointerPosition())
-        grapnel.speedY = ratio.sin * grapnelSpeed
-        grapnel.speedX = ratio.cos * grapnelSpeed
+        grapnel.speedY = ratio.sin * grapnelSpeed// + ninja.speedY
+        grapnel.speedX = ratio.cos * grapnelSpeed + ninja.speedX
         
         layer.grapnel.add(grapnel.object)        
         
         grapnel.throwed = true
+        grapnel.grappled = false    
     }
     function pickUpGrapnel()
     {

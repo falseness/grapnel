@@ -16,6 +16,7 @@ class Screen
             sprites[i].speedX = this.speed
         }
         obstacles.posX += this.speed
+        enemies.posX += this.speed
         
         ninja.x += this.speed
         grapnel.x += this.speed
@@ -23,9 +24,12 @@ class Screen
     shouldStartMove()
     {
         if (ninja.x > this.whenceMove && ninja.speedX > 0)
+        {
             this.speed = -ninja.speedX
-        else
-            this.speed = 0
+            return true
+        }
+        this.speed = 0
+        return false
     }
 }
 

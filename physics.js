@@ -5,14 +5,18 @@ function physics()
     ninja.speedY += GRAVITY
     
     
-    screen.shouldStartMove()
+   
     /*screen.shouldStartMoveByBarrier()*/
-    screen.move()
+    screen.shouldStartMove()
     
+    
+    screen.move()
     for (let i = 0; i < sprites.length; ++i)
     {
         sprites[i].move()
     }
+    
+    
     ninja.move()
     ninja.collision()
     
@@ -25,10 +29,10 @@ function physics()
             ninja.speedX += grappleSpeed * ratio.cos
             ninja.speedY += grappleSpeed * ratio.sin
         }
-        else if (!grapnel.grappled())
+        else if (!grapnel.grappled)
             grapnel.collision()
     }
-    deleteObstacles()
+    deleteObstacles(obstacles)
 }
 
 /*

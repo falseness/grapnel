@@ -17,4 +17,10 @@ class Obstacle extends Sprite
             this.points.push(object.attrs.points[i + 1])
         }
     }
+    delete(indexInArray, array)
+    {
+        array[indexInArray].object.destroy()
+        array[indexInArray + 1].object.destroy() //obstacles идут парами
+        array.splice(indexInArray, 2)
+    }
 }

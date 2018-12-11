@@ -29,6 +29,10 @@ class Sprite
         }
         this.object.attrs.points = points*/
     }
+    moveObject()
+    {
+        
+    }
 }
 
 

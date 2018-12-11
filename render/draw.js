@@ -20,7 +20,15 @@ let draw =
             sprites[i].object.points(floorPoints(sprites[i].points))
         }*/
         obstacles.setX(obstacles.posX)
-    }, layer.obstacles)
+    }, layer.obstacles),
+    enemies: new Konva.Animation(function(frame)
+    {
+        for (let i = sides.length; i < sprites.length; ++i)
+        {
+            sprites[i].moveObject()
+        }
+        enemies.setX(enemies.posX)
+    }, layer.enemies)
 }
 function drawStaticLayers()
 {
@@ -29,11 +37,16 @@ function drawStaticLayers()
 }
 function drawObstaclesFirstTime()
 {
-    /*for (let i = sides.length; i < sprites.length; ++i)
-    {
-        sprites[i].object.points(floorPoints(sprites[i].points))
-    }*/
     layer.obstacles.draw()
+}
+function drawEnemiesFirstTime()
+{
+    layer.enemies.draw()
+}
+function drawElementsFirstTime()
+{
+    drawObstaclesFirstTime()
+    drawEnemiesFirstTime()
 }
 function drawMechanicsLines()
 {
@@ -75,7 +88,7 @@ function drawMechanicsLines()
 
 function startDrawAnimations()
 {
-    drawObstaclesFirstTime()
+    drawElementsFirstTime()
     layer.scoreText.draw()
     
     for (i in draw)

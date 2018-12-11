@@ -7,6 +7,8 @@ class Grapnel extends Sprite
     {
         super(object)
         this.throwed = false
+        
+        this.grappled = false
     }
     move()
     {
@@ -14,6 +16,10 @@ class Grapnel extends Sprite
         {
             this.x += this.speedX
             this.y += this.speedY
+            if (this.grappled)
+            {
+                this.y += this.grappled.speedY
+            }
         }
     }
     calcSpeed(direction)
@@ -40,15 +46,15 @@ class Grapnel extends Sprite
             {
                 let line = lineFormula(points[j], points[j + 1],
                                 points[j + 2], points[j + 3])
-                this.grapple(linesCollision(grapnelLine, line))
+                this.grapple(linesCollision(grapnelLine, line), sprites[i])
             }
             let line = lineFormula(points[points.length - 2], points[points.length - 1],
                                 points[0], points[1])
-            this.grapple(linesCollision(grapnelLine, line))
+            this.grapple(linesCollision(grapnelLine, line), sprites[i])
                 
         }
     }
-    grapple(coords)
+    grapple(coords, sprite)
     {
         if (coords)
         {
@@ -56,11 +62,7 @@ class Grapnel extends Sprite
             this.y = coords.y
             this.speedX = 0
             this.speedY = 0
-            //screen.shouldStartMoveByGrapnel()
+            this.grappled = sprite
         }
-    }
-    grappled()
-    {
-        return (this.speedX == 0 && this.speedY == 0 && grapnel.throwed)
     }
 }
