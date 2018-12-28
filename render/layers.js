@@ -15,6 +15,7 @@ function addLayersToStage()
 {
     for (let i in layer)
     {
+        layer[i].hitGraphEnabled(false)
         stage.add(layer[i])
     }
 }
