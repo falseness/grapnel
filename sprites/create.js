@@ -6,7 +6,8 @@ let ninja = new Ninja(new Konva.Circle({
     stroke: '#000000',
     strokeWidth: 1,
     perfectDrawEnabled: false,
-    transformsEnabled: 'position'
+    transformsEnabled: 'position',
+    listening: false
 }))
 let grapnel = new Grapnel(new Konva.Line({
     points: [0, 0, 0, 0],
@@ -14,7 +15,8 @@ let grapnel = new Grapnel(new Konva.Line({
     strokeWidth: Math.round(0.006 * height),
     lineJoin: 'round',
     perfectDrawEnabled: false,
-    transformsEnabled: 'position'
+    transformsEnabled: 'position',
+    listening: false
 }))
 
 let scoreText = new Konva.Text({
@@ -25,7 +27,8 @@ let scoreText = new Konva.Text({
         fontFamily: 'Calibri',
         fill: 'blue',
         perfectDrawEnabled: false,
-        transformsEnabled: 'position'
+        transformsEnabled: 'position',
+        listening: false
     })
 scoreText.count = 0
 
@@ -81,7 +84,8 @@ for (let i = 0; i < sides.length; ++i)
         strokeWidth: 1,
         closed: true,
         perfectDrawEnabled: false,
-        transformsEnabled: 'position'
+        transformsEnabled: 'position',
+        listening: false
     })))
 }
 

@@ -8,7 +8,8 @@ function getObject(model)
         strokeWidth: model.strokeWidth,
         closed: true,
         perfectDrawEnabled: false,
-        transformsEnabled: 'position'
+        transformsEnabled: 'position',
+        listening: false
     })
     return object
 }
