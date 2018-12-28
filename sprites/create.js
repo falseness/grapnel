@@ -4,13 +4,15 @@ let ninja = new Ninja(new Konva.Circle({
     radius: Math.round(0.01 * height),
     fill: '#0000ff',
     stroke: '#000000',
-    strokeWidth: 1
+    strokeWidth: 1,
+    perfectDrawEnabled: false
 }))
 let grapnel = new Grapnel(new Konva.Line({
     points: [0, 0, 0, 0],
     stroke: 'red',
     strokeWidth: Math.round(0.006 * height),
-    lineJoin: 'round'
+    lineJoin: 'round',
+    perfectDrawEnabled: false
 }))
 
 let scoreText = new Konva.Text({
@@ -19,7 +21,8 @@ let scoreText = new Konva.Text({
         text: 'score: 0',
         fontSize: Math.floor(0.05 * height),
         fontFamily: 'Calibri',
-        fill: 'blue'
+        fill: 'blue',
+        perfectDrawEnabled: false
     })
 scoreText.count = 0
 
@@ -66,14 +69,15 @@ for (let i = 0; i < sides.length; ++i)
 {
     const sidesColor = '#f0f0f0'
     sprites.push(new Sprite(new Konva.Line({
-      points: floorPoints([sides[i].x, sides[i].y, 
+        points: floorPoints([sides[i].x, sides[i].y, 
               sides[i].x + sides[i].width, sides[i].y, 
               sides[i].x + sides[i].width, sides[i].y + sides[i].height,
               sides[i].x, sides[i].y + sides[i].height]),
-      fill: sidesColor,
-      stroke: 'black',
-      strokeWidth: 1,
-      closed: true
+        fill: sidesColor,
+        stroke: 'black',
+        strokeWidth: 1,
+        closed: true,
+        perfectDrawEnabled: false
     })))
 }
 

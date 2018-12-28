@@ -6,7 +6,8 @@ function getObject(model)
         fill: model.color,
         stroke: model.strokeColor,
         strokeWidth: model.strokeWidth,
-        closed: true
+        closed: true,
+        perfectDrawEnabled: false
     })
     return object
 }
