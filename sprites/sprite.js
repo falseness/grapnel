@@ -37,6 +37,22 @@ class Sprite
     {
         reStart()
     }
+    isGrappled()
+    {
+        return true
+    }
+}
+class Empty
+{
+    constructor()
+    {
+        this.speedX = 0
+        this.speedY = 0
+    }
+    isGrappled()
+    {
+        return false
+    }
 }
 
 

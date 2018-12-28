@@ -1,4 +1,4 @@
-const grapnelSpeed = 0.018891687657430732 * height
+const grapnelSpeed = 0.018891687657430732 * height * 2
 const grappleSpeed = 0.00025188916876574307 * height
 
 class Grapnel extends Sprite
@@ -9,17 +9,30 @@ class Grapnel extends Sprite
         this.throwed = false
         
         this.grappled = false
+        this.pos = [[this.x, this.y, new Empty()]]
     }
     move()
     {
         if (this.throwed)
         {
-            this.x += this.speedX
-            this.y += this.speedY
-            if (this.grappled)
+            for (let i = 0; i < this.pos.length; ++i)
+            {
+                if (!this.pos[i][2].isGrappled())
+                {
+                    this.pos[i][0] += this.speedX
+                    this.pos[i][1] += this.speedY
+                }
+            }
+           /* this.x += this.speedX
+            this.y += this.speedY*/
+            for (let i = 0; i < this.pos.length; ++i)
+            {
+                this.pos[i][1] += this.pos[i][2].speedY
+            }
+            /*if (this.grappled)
             {
                 this.y += this.grappled.speedY
-            }
+            }*/
         }
     }
     calcSpeed(direction)
@@ -35,34 +48,114 @@ class Grapnel extends Sprite
         
     }
     collision()
-    {
-        let grapnelLine = lineFormula(this.object.attrs.points[0], this.object.attrs.points[1],
-                                this.object.attrs.points[2], this.object.attrs.points[3])
-        for (let i = 0; i < sprites.length; ++i)
+    { 
+        for (let q = 1; q <= this.pos.length; ++q)
         {
-            let points = sprites[i].points
-            
-            for (let j = 0; j <= points.length / 2; j += 2)
+            if (q > 10)
             {
-                let line = lineFormula(points[j], points[j + 1],
-                                points[j + 2], points[j + 3])
-                this.grapple(linesCollision(grapnelLine, line), sprites[i])
+                console.log('ERROR!!!' + q)
             }
-            let line = lineFormula(points[points.length - 2], points[points.length - 1],
-                                points[0], points[1])
-            this.grapple(linesCollision(grapnelLine, line), sprites[i])
-                
+            let grapnelLine
+            if (q == this.pos.length)
+                grapnelLine = lineFormula(ninja.x, ninja.y, this.pos[this.pos.length - 1][0], this.pos[this.pos.length - 1][1])
+            else
+                grapnelLine = lineFormula(this.pos[q - 1][0], this.pos[q - 1][1], this.pos[q][0], this.pos[q][1])
+            
+            for (let i = 0; i < sprites.length; ++i)
+            {
+                let points = sprites[i].points
+
+                for (let j = 0; j <= points.length / 2; j += 2)
+                {
+                    let line = lineFormula(points[j], points[j + 1],
+                                    points[j + 2], points[j + 3])
+                    this.grapple(linesCollision(grapnelLine, line), sprites[i], q)
+                }
+                let line = lineFormula(points[points.length - 2], points[points.length - 1],
+                                    points[0], points[1])
+                this.grapple(linesCollision(grapnelLine, line), sprites[i], q)
+
+            }
         }
     }
-    grapple(coords, sprite)
+    correctToCornerOfSprite(x, y, sprite, eps)
     {
-        if (coords)
+        for (let i = 0; i < sprite.points.length; i += 2)
         {
-            this.x = coords.x
-            this.y = coords.y
-            this.speedX = 0
-            this.speedY = 0
-            this.grappled = sprite
+            if (isPointsEqually([x, y], [sprite.points[i], sprite.points[i + 1]], eps))
+                return {x: sprite.points[i], y: sprite.points[i + 1]}
         }
+        return {x: x, y: y}
+    }
+    pointsIsOnOneLine(point1, point2, point3)
+    {
+        let line = lineFormula(point1[0], point1[1], point2[0], point2[1])
+        return pointIsOnStraight({x: point3[0], y: point3[1]}, line)
+    }
+    grapple(coords, sprite, index)
+    {
+        if (coords.x && coords.y)
+        {
+            const correctCornerEps = 6
+            const firstPointEps = 50
+            coords = this.correctToCornerOfSprite(coords.x, coords.y, sprite, correctCornerEps)
+            
+            this.grappled = true
+            if  (
+                    index == 1                                                          && 
+                    !this.pos[0][2].isGrappled()                                        && 
+                    isPointsEqually(this.pos[0], [coords.x, coords.y], firstPointEps)
+                )
+            {
+                this.pos[0] = [coords.x, coords.y, sprite]
+            }
+            else if (this.pos.length == index)
+            {
+                if      (
+                            index - 2 >= 0                  &&
+                            this.pointsIsOnOneLine
+                                (
+                                    this.pos[index - 2], 
+                                    this.pos[index - 1],
+                                    [coords.x, coords.y]
+                                )
+                        )
+                    this.pos.pop()
+                    
+                this.pos.push([coords.x, coords.y, sprite])
+            }
+            else 
+            { 
+                if      (
+                            this.pointsIsOnOneLine
+                                (
+                                    this.pos[index - 1] , 
+                                    this.pos[index]     ,
+                                    [coords.x, coords.y]
+                                )
+                        )
+                    return
+
+                this.pos.splice(index, 0, [coords.x, coords.y, sprite])
+            }
+        }
+    }
+    getObjectPoints()
+    {
+        let res = []
+        for (let i = 0; i < this.pos.length; ++i)
+        {
+            res.push(Math.floor(this.pos[i][0]), Math.floor(this.pos[i][1]))
+        }
+        res.push(Math.floor(ninja.x), Math.floor(ninja.y))
+        return res
+    }
+    isGrappled()
+    {
+        return this.grappled
+    }
+    setGrappled(boolean)
+    {
+        this.grappled = boolean
     }
 }

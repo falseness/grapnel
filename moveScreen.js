@@ -18,6 +18,11 @@ class Screen
         deltaX += this.speed
         
         ninja.x += this.speed
+        
+        for (let i = 0; i < grapnel.pos.length; ++i)
+        {
+            grapnel.pos[i][0] += this.speed
+        }
         grapnel.x += this.speed
     }
     shouldStartMove()

@@ -62,3 +62,17 @@ function linesCollision(line1, line2)
     else
         return collisionVerticalWithVertical(line1, line2)
 }
+function pointIsOnStraight(point, line)
+{
+    if (line.type == 'vertical')
+    {
+        return (line.x == point.x)
+    }
+    else if (line.type == 'line')
+    {
+        const eps = 0.1
+        return (isEqually(point.y, line.k * point.x + line.b, eps))
+    }
+    else
+        console.log('Error line type')
+}

@@ -23,14 +23,13 @@ function physics()
     grapnel.move()
     if (grapnel.throwed)
     {
-        if (grapnel.speedX == 0 && grapnel.speedY == 0)
+        if (grapnel.isGrappled())//grapnel.speedX == 0 && grapnel.speedY == 0)
         {
-            let ratio = grapnel.calcSpeed({x: grapnel.x, y: grapnel.y})
+            let ratio = grapnel.calcSpeed({x: grapnel.pos[grapnel.pos.length - 1][0], y: grapnel.pos[grapnel.pos.length - 1][1]})
             ninja.speedX += grappleSpeed * ratio.cos
             ninja.speedY += grappleSpeed * ratio.sin
         }
-        else if (!grapnel.grappled)
-            grapnel.collision()
+        grapnel.collision()
     }
     deleteObstacles(obstacles)
 }
