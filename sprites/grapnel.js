@@ -58,18 +58,22 @@ class Grapnel extends Sprite
             
             for (let i = 0; i < sprites.length; ++i)
             {
-                let points = sprites[i].getPoints()
-
-                for (let j = 0; j <= points.length / 2; j += 2)
+                circlesIntersect(this.x, this.y, this.radius, sprites[i].getCircumscribedCircle())
+                if (circlesIntersect(grapnelLine.center.x, grapnelLine.center.y, 
+                                     grapnelLine.radius, sprites[i].getCircumscribedCircle()))
                 {
-                    let line = lineFormula(points[j], points[j + 1],
-                                    points[j + 2], points[j + 3])
+                    let points = sprites[i].getPoints()
+
+                    for (let j = 0; j <= points.length / 2; j += 2)
+                    {
+                        let line = lineFormula(points[j], points[j + 1],
+                                        points[j + 2], points[j + 3])
+                        this.grapple(linesCollision(grapnelLine, line), sprites[i], q)
+                    }
+                    let line = lineFormula(points[points.length - 2], points[points.length - 1],
+                                        points[0], points[1])
                     this.grapple(linesCollision(grapnelLine, line), sprites[i], q)
                 }
-                let line = lineFormula(points[points.length - 2], points[points.length - 1],
-                                    points[0], points[1])
-                this.grapple(linesCollision(grapnelLine, line), sprites[i], q)
-
             }
         }
     }
