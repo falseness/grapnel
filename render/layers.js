@@ -1,7 +1,7 @@
 
 let layer = 
 {
-    grapnel: new Konva.Layer(),
+    grapnel: new Konva.FastLayer(),
     static: new Konva.FastLayer(),
     rects: new Konva.FastLayer(),
     ninja: new Konva.FastLayer(),
