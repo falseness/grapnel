@@ -8,4 +8,8 @@ class Side extends Rect
     {
         return this.x
     }
+    getCircumscribedCircle()
+    {
+        return this.circle
+    }
 }

@@ -9,6 +9,10 @@ class Triangle extends Element
         this.side   =   this.object.attrs.radius * Math.sqrt(3)
         this.height =   this.side * Math.sin(Math.PI / 3)
     }
+    getCircumscribedCircle()
+    {
+        return {x: this.x + deltaX, y: this.y + this.deltaY, radius: this.object.attrs.radius}
+    }
     move()
     {
         this.changeSpeed()

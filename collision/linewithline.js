@@ -3,7 +3,12 @@ function circlesDoNotIntersect(x1, y1, x2, y2, r1, r2)
     return  Math.pow(x1 - x2, 2) +
             Math.pow(y1 - y2, 2) > Math.pow(r1 + r2, 2)
 }
-function circlesDescribedAroundTwoVerticalsDoNotIntersect(y1, y2, r1, r2)
+function circlesIntersect(x, y, r, circle)
+{
+    return  Math.pow(x - circle.x, 2) +
+            Math.pow(y - circle.y, 2) <= Math.pow(r + circle.radius, 2)
+}
+function circlesCircumscribedAroundTwoVerticalsDoNotIntersect(y1, y2, r1, r2)
 {
     return  Math.abs(y1 - y2) <= (r1 + r2)
 }
@@ -32,7 +37,7 @@ function collisionVerticalWithVertical(vertical1, vertical2)
 {   
     if ( 
             vertical1.x == vertical2.x && 
-            circlesDescribedAroundTwoVerticalsDoNotIntersect
+            circlesCircumscribedAroundTwoVerticalsDoNotIntersect
             (
                 vertical1.center.y  , vertical2.center.y, 
                 vertical1.radius    , vertical2.radius

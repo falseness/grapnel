@@ -6,13 +6,37 @@ class Trampoline extends Element
         
         this.x = this.object.attrs.points[0]
         
+        this.circle = 
+        {
+            x: 0,
+            y: 0
+        }
         this.rightPointX = this.object.attrs.points[0]
         for (let i = 0; i < this.object.attrs.points.length; i += 2)
         {
             if (this.object.attrs.points[i] > this.rightPointX)
                 this.rightPointX = this.object.attrs.points[i]
+            
+            this.circle.x += this.object.attrs.points[i]
+            this.circle.y += this.object.attrs.points[i + 1]
         }
         
+        this.circle.x /= (this.object.attrs.points.length / 2)
+        this.circle.y /= (this.object.attrs.points.length / 2)
+        
+        let r = 0
+        for (let i = 0; i < this.object.attrs.points.length; i += 2)
+        {
+            let t = Math.pow(this.object.attrs.points[i] - this.circle.x, 2) +
+                    Math.pow(this.object.attrs.points[i + 1] - this.circle.y, 2)
+            if (t > r)
+                r = t
+        }
+        this.circle.radius = Math.sqrt(r)
+    }
+    getCircumscribedCircle()
+    {
+        return {x: this.circle.x + deltaX, y: this.circle.y, radius: this.circle.radius}
     }
     getPoints()
     {

@@ -3,6 +3,16 @@ class Rect extends Element
     constructor(object)
     {
         super(object)
+        this.circle =
+        {
+            x: this.x + object.attrs.width  / 2,
+            y: this.y + object.attrs.height / 2
+        }
+        this.circle.radius = Math.sqrt(Math.pow(this.circle.x - this.x, 2) + Math.pow(this.circle.y - this.y, 2))
+    }
+    getCircumscribedCircle()
+    {
+        return {x: this.circle.x + deltaX, y: this.circle.y, radius: this.circle.radius}
     }
     getPoints()
     {   
