@@ -13,8 +13,7 @@ class Element
     }
     move()
     {
-        this.x += this.speedX
-        this.y += this.speedY
+        
     }
     getX()
     {
@@ -40,5 +39,9 @@ class Element
     {
         array[indexInArray].object.destroy()
         array.splice(indexInArray, 1)
+    }
+    moveObject()
+    {
+        
     }
 }

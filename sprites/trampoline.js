@@ -3,11 +3,29 @@ class Trampoline extends Element
     constructor(object)
     {
         super(object)
-        /*
-    Добавь функцию getXForNextElement
-    Сделай анимацию прогибанию батута
-    Пофиксь баги с углами
-    */
+        
+        this.x = this.object.attrs.points[0]
+        
+        this.rightPointX = this.object.attrs.points[0]
+        for (let i = 0; i < this.object.attrs.points.length; i += 2)
+        {
+            if (this.object.attrs.points[i] > this.rightPointX)
+                this.rightPointX = this.object.attrs.points[i]
+        }
+        
+    }
+    getPoints()
+    {
+        let points = this.object.attrs.points.slice()
+        for (let i = 0; i < points.length; i += 2)
+        {
+            points[i] += deltaX
+        }
+        return points
+    }
+    getRightPointX()
+    {
+        return this.rightPointX + deltaX
     }
     collision(who, line)
     {

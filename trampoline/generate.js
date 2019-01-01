@@ -15,23 +15,29 @@ function generateTrampolinePoints(x)
     }
     
     let x2 = x + random(trampolineRestriction.width.min, trampolineRestriction.width.max)
-    let y1 = sides[1].y
+    
+    let _case = (random() < 80)?1:0
+    let y1 = sides[_case].y
+    let ratio = -1
+    
+    if (!_case)
+    {
+        ratio = 1
+        y1 += sides[_case].height
+    }
+    
     return [x, y1, x, 
-            y1 - random(trampolineRestriction.height.min, trampolineRestriction.height.max),
-            x2, y1 - random(trampolineRestriction.height.min, trampolineRestriction.height.max),
+            y1 + ratio * random(trampolineRestriction.height.min, trampolineRestriction.height.max),
+            x2, y1 + ratio * random(trampolineRestriction.height.min, trampolineRestriction.height.max),
             x2, y1]
 }
 function generateTrampoline(x, group)
 {
-    const trampolineModel = 
+    trampolineModel = 
     {
-        color: '#3e1170',
-        strokeColor: 'black',
-        strokeWidth: 1
+            points: generateTrampolinePoints(x)
     }
-    
-    trampolineModel.points = generateTrampolinePoints(x)
-    sprites.push(new Trampoline(getObject(trampolineModel)))
+    sprites.push(new Trampoline(createLineByModel(trampolineModel)))
     group.add(sprites[sprites.length - 1].object)
     
     let generatedElementsNumber = 1

@@ -7,7 +7,7 @@ let layer =
     ninja: new Konva.Layer(),
     mechanics: new Konva.Layer(),
     scoreText: new Konva.Layer(),
-    enemies: new Konva.Layer(),
+    triangles: new Konva.Layer(),
     trampolines: new Konva.Layer()
 }
 
@@ -27,7 +27,7 @@ function addSpritesToLayers()
     
     layer.rects.add(rects)
     
-    layer.enemies.add(enemies)
+    layer.triangles.add(triangles)
     layer.trampolines.add(trampolines)
     
     layer.scoreText.add(scoreText)

@@ -1,5 +1,9 @@
-function getObject(model)
+function createLineByModel(model)
 {
+    model.color         = model.color       || '#3e1170'
+    model.strokeColor   = model.strokeColor || 'black'
+    model.strokeWidth   = model.strokeWidth || 1
+
     object = new Konva.Line(
     {
         points: model.points,

@@ -20,6 +20,7 @@
         
         <script src = "createObjectsByModel/createLineObject.js"></script>
         <script src = "createObjectsByModel/createRectObject.js"></script>
+        <script src = "createObjectsByModel/createTriangleObject.js"></script>
         
         <script src = "collision/circlewithline.js"></script>
         <script src = "collision/linewithline.js"></script>
@@ -35,14 +36,14 @@
         
         <script src = "sprites/create.js"></script>
 
-        <script src = "sprites/enemy.js"></script>
+        <script src = "sprites/triangle.js"></script>
         <script src = "sprites/trampoline.js"></script>
         
         <script src = "physics.js"></script>
         
         <script src = "rects/generate.js"></script>
         
-        <script src = "enemies/generate.js"></script>
+        <script src = "triangles/generate.js"></script>
         
         <script src = "trampoline/generate.js"></script>
         
@@ -90,7 +91,7 @@
                 
                 deltaX = 0
                 rects.setX(deltaX)
-                enemies.setX(deltaX)
+                triangles.setX(deltaX)
                 trampolines.setX(deltaX)
                 
                 generatePrimaryElements()

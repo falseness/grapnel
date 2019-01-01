@@ -9,7 +9,7 @@ let ninja = new Ninja(new Konva.Circle({
     transformsEnabled: 'position',
     listening: false
 }))
-ninja.object.cache()
+//ninja.object.cache()
 
 let grapnel = new Grapnel(new Konva.Line({
     points: [0, 0, 0, 0],
@@ -47,7 +47,7 @@ let rects = new Konva.Group(
     listening:          false
 })
 
-let enemies = new Konva.Group(
+let triangles = new Konva.Group(
 {
     x: 0,
     y: 0,

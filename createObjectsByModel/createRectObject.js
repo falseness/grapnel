@@ -16,6 +16,6 @@ function createRectByModel(model)
         transformsEnabled: 'position'           ,
         listening:          false
     })
-    object.cache()
+    //object.cache()
     return object
 }

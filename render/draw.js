@@ -16,6 +16,15 @@ let draw =
         
         rects.setX(deltaX)
     }, layer.rects),
+    triangles: new Konva.Animation(function(frame)
+    {
+        for (let i = sides.length; i < sprites.length; ++i)
+        {
+            sprites[i].moveObject()
+        }
+        
+        triangles.setX(deltaX)
+    }, layer.triangles),
     /*enemies: new Konva.Animation(function(frame)
     {
         for (let i = sides.length; i < sprites.length; ++i)
@@ -40,7 +49,7 @@ function drawRectsFirstTime()
 }
 function drawEnemiesFirstTime()
 {
-    layer.enemies.draw()
+    layer.triangles.draw()
 }
 function drawElementsFirstTime()
 {

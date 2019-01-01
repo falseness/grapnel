@@ -2,10 +2,9 @@ function generate(x)
 {
     const generateChancePercent = 
     {
-        rects: 100,
-        obstacles: 0,//40
-        enemies: 0,//35,
-        trampolines: 0//25
+        rects: 40,
+        triangles: 35,
+        trampolines: 25
     }
     let num = random()
     
@@ -15,21 +14,15 @@ function generate(x)
         return generatedElementsNumber
     }
     
-    if (generateChancePercent.rects <= num  && 
-            num < generateChancePercent.obstacles)
-    {
-        let generatedElementsNumber = generateObstacle(x, obstacles)
-        return generatedElementsNumber
-    }
     
-    if (generateChancePercent.obstacles <= num && 
-             num < generateChancePercent.obstacles + generateChancePercent.enemies)
+    if (generateChancePercent.rects <= num && 
+             num < generateChancePercent.rects + generateChancePercent.triangles)
     {
-        let generatedElementsNumber = generateEnemy(x, enemies)
+        let generatedElementsNumber = generateTriangle(x, triangles)
         return generatedElementsNumber
     }
-    if (generateChancePercent.obstacles + generateChancePercent.enemies <= num &&
-        generateChancePercent.obstacles + generateChancePercent.enemies + generateChancePercent.trampolines)
+    if (generateChancePercent.rects + generateChancePercent.triangles <= num &&
+        generateChancePercent.rects + generateChancePercent.triangles + generateChancePercent.trampolines)
     {
         let generatedElementsNumber = generateTrampoline(x, trampolines)
         return generatedElementsNumber
