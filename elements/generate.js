@@ -2,13 +2,21 @@ function generate(x)
 {
     const generateChancePercent = 
     {
-        obstacles: 40,//40
-        enemies: 35,//35,
-        trampolines:25//25
+        rects: 100,
+        obstacles: 0,//40
+        enemies: 0,//35,
+        trampolines: 0//25
     }
     let num = random()
     
-    if (num < generateChancePercent.obstacles)
+    if (num < generateChancePercent.rects)
+    {
+        let generatedElementsNumber = generateRect(x, rects)
+        return generatedElementsNumber
+    }
+    
+    if (generateChancePercent.rects <= num  && 
+            num < generateChancePercent.obstacles)
     {
         let generatedElementsNumber = generateObstacle(x, obstacles)
         return generatedElementsNumber
@@ -36,6 +44,6 @@ function generatePrimaryElements()
     
     for (let i = 0; i < elementsPairNumber; ++i)
     {
-        generate(firstElementX + (obstacleIndent + obstacleWidth) * i)
+        generate(firstElementX + (rectIndent + rectWidth) * i)
     }
 }

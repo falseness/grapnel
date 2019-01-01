@@ -11,10 +11,10 @@ function physics()
     
     
     screen.move()
-    for (let i = 0; i < sprites.length; ++i)
+    /*for (let i = 0; i < sprites.length; ++i)
     {
         sprites[i].move()
-    }
+    }*/
     
     
     ninja.move()
@@ -31,7 +31,7 @@ function physics()
         }
         grapnel.collision()
     }
-    deleteObstacles(obstacles)
+    deleteElements()
 }
 
 /*

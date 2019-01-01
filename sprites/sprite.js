@@ -49,9 +49,9 @@ class Empty
         this.speedX = 0
         this.speedY = 0
     }
-    isGrappled()
+    isEmpty()
     {
-        return false
+        return true
     }
 }
 

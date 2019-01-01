@@ -17,22 +17,17 @@ class Grapnel extends Sprite
         {
             for (let i = 0; i < this.pos.length; ++i)
             {
-                if (!this.pos[i][2].isGrappled())
+                if (this.pos[i][2].isEmpty())
                 {
                     this.pos[i][0] += this.speedX
                     this.pos[i][1] += this.speedY
                 }
             }
-           /* this.x += this.speedX
-            this.y += this.speedY*/
+            
             for (let i = 0; i < this.pos.length; ++i)
             {
                 this.pos[i][1] += this.pos[i][2].speedY
             }
-            /*if (this.grappled)
-            {
-                this.y += this.grappled.speedY
-            }*/
         }
     }
     calcSpeed(direction)
@@ -63,7 +58,7 @@ class Grapnel extends Sprite
             
             for (let i = 0; i < sprites.length; ++i)
             {
-                let points = sprites[i].points
+                let points = sprites[i].getPoints()
 
                 for (let j = 0; j <= points.length / 2; j += 2)
                 {
@@ -78,12 +73,12 @@ class Grapnel extends Sprite
             }
         }
     }
-    correctToCornerOfSprite(x, y, sprite, eps)
+    correctToCornerOfSprite(x, y, points, eps)
     {
-        for (let i = 0; i < sprite.points.length; i += 2)
+        for (let i = 0; i < points.length; i += 2)
         {
-            if (isPointsEqually([x, y], [sprite.points[i], sprite.points[i + 1]], eps))
-                return {x: sprite.points[i], y: sprite.points[i + 1]}
+            if (isPointsEqually([x, y], [points[i], points[i + 1]], eps))
+                return {x: points[i], y: points[i + 1]}
         }
         return {x: x, y: y}
     }
@@ -98,12 +93,12 @@ class Grapnel extends Sprite
         {
             const correctCornerEps = 6
             const firstPointEps = 50
-            coords = this.correctToCornerOfSprite(coords.x, coords.y, sprite, correctCornerEps)
+            coords = this.correctToCornerOfSprite(coords.x, coords.y, sprite.getPoints(), correctCornerEps)
             
             this.grappled = true
             if  (
                     index == 1                                                          && 
-                    !this.pos[0][2].isGrappled()                                        && 
+                    this.pos[0][2].isEmpty()                                            && 
                     isPointsEqually(this.pos[0], [coords.x, coords.y], firstPointEps)
                 )
             {

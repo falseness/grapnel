@@ -10,7 +10,7 @@ class Ninja extends Sprite
     {
         for (let i = 0; i < sprites.length; ++i)
         {
-            let points = sprites[i].points
+            let points = sprites[i].getPoints(deltaX)
             for (let j = 0; j < points.length; j += 2)
             {
                 if (this.collisionNinjaWithLine(points[j], points[j + 1], points[j + 2], points[j + 3]))
@@ -18,15 +18,6 @@ class Ninja extends Sprite
             }
             if (this.collisionNinjaWithLine(points[points.length - 2], points[points.length - 1], points[0], points[1]))
                 sprites[i].collision(this, lineFormula(points[points.length - 2], points[points.length - 1], points[0], points[1]))
-          /* if (this.collisionNinjaWithLine(sprites[i].x, sprites[i].y, 
-                                           sprites[i].x + sprites[i].width, sprites[i].y) ||
-                this.collisionNinjaWithLine(sprites[i].x, sprites[i].y + sprites[i].height,
-                                          sprites[i].x + sprites[i].width, sprites[i].y + sprites[i].height) ||
-                this.collisionNinjaWithLine(sprites[i].x, sprites[i].y,
-                                          sprites[i].x, sprites[i].y + sprites[i].height) ||
-                this.collisionNinjaWithLine(sprites[i].x + sprites[i].width, sprites[i].y,
-                                          sprites[i].x + sprites[i].width, sprites[i].y + sprites[i].height))
-               console.log('collision')*/
         }
     }
     collisionNinjaWithLine(x1, y1, x2, y2)
@@ -37,7 +28,5 @@ class Ninja extends Sprite
     {
         this.x += this.speedX
         this.y += this.speedY
-        /*this.object.setX(Math.floor(this.x))
-        this.object.setY(Math.floor(this.y))*/
     }
 }

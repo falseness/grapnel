@@ -11,10 +11,10 @@ class Screen
     }
     move()
     {
-        for (let i = sides.length; i < sprites.length; ++i)
+        /*for (let i = sides.length; i < sprites.length; ++i)
         {
             sprites[i].speedX = this.speed
-        }
+        }*/
         deltaX += this.speed
         
         ninja.x += this.speed

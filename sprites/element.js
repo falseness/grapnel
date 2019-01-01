@@ -1,21 +1,40 @@
-class Element extends Sprite
+class Element
 {
     constructor(object)
     {
-        super(object)
-        this.points = []
-        /*
-        Код из дерьма и палок
-        Переделай полностью sprite и obstacle
-        сделай препятствия rect'ами
-        добавь функцию, дающую по информации о rect'е массив points и обрабатывай нормально коллизии
-        или сделай у rect'a свой личный массив points для удобства и оптимизации
-        */
-        for (let i = 0; i < object.attrs.points.length; i += 2)
-        {
-            this.points.push(object.attrs.points[i] + deltaX)
-            this.points.push(object.attrs.points[i + 1])
-        }
+        this.object = object
+        
+        this.speedX = 0
+        this.speedY = 0
+        
+        this.x = object.attrs.x
+        this.y = object.attrs.y
+
+    }
+    move()
+    {
+        this.x += this.speedX
+        this.y += this.speedY
+    }
+    getX()
+    {
+        return this.x + deltaX
+    }
+    getY()
+    {
+        return this.y
+    }
+    collision()
+    {
+        reStart()
+    }
+    isEmpty()
+    {
+        return false
+    }
+    isPairElement()
+    {
+        return false
     }
     delete(indexInArray, array)
     {

@@ -1,4 +1,4 @@
-function elementNotOnMap(points)
+/*function elementNotOnMap(points)
 {
     for (let i = 0; i < points.length; i += 2)
     {
@@ -6,7 +6,7 @@ function elementNotOnMap(points)
             return false
     }
     return true
-}
+}*/
 
 function changeScoreText()
 {
@@ -15,18 +15,19 @@ function changeScoreText()
 }
 
 
-function deleteObstacles(group)
+function deleteElements()
 {
-    newElements = 0
+    let newElements = 0
     for (let i = sides.length; i < sprites.length - newElements; ++i)
     {
-        if (elementNotOnMap(sprites[i].points))
+        if (sprites[i].getRightPointX() < 0)
         {
             sprites[i].delete(i, sprites)
     
-            newElements += generate(sprites[sprites.length - 1].object.attrs.points[0] + (obstacleIndent + obstacleWidth))
+            newElements += generate(sprites[sprites.length - 1].x + (rectIndent + rectWidth))
             
             changeScoreText()
         }
     }
 }
+
