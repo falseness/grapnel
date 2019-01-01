@@ -9,25 +9,21 @@ let draw =
     {
         grapnel.object.points(grapnel.getObjectPoints())
     }, layer.grapnel),
-    obstacles: new Konva.Animation(function(frame)
+    rects: new Konva.Animation(function(frame)
     {
         if (!screen.speed)
             return false
         
-        /*for (let i = sides.length; i < sprites.length; ++i)
-        {
-            sprites[i].object.points(floorPoints(sprites[i].points))
-        }*/
-        obstacles.setX(deltaX)
-    }, layer.obstacles),
-    enemies: new Konva.Animation(function(frame)
+        rects.setX(deltaX)
+    }, layer.rects),
+    /*enemies: new Konva.Animation(function(frame)
     {
         for (let i = sides.length; i < sprites.length; ++i)
         {
             sprites[i].moveObject()
         }
         enemies.setX(deltaX)
-    }, layer.enemies),
+    }, layer.enemies),*/
     trampolines: new Konva.Animation(function(frame)
     {
         trampolines.setX(deltaX)
@@ -38,9 +34,9 @@ function drawStaticLayers()
     layer.static.draw()
     layer.mechanics.draw()
 }
-function drawObstaclesFirstTime()
+function drawRectsFirstTime()
 {
-    layer.obstacles.draw()
+    layer.rects.draw()
 }
 function drawEnemiesFirstTime()
 {
@@ -48,7 +44,7 @@ function drawEnemiesFirstTime()
 }
 function drawElementsFirstTime()
 {
-    drawObstaclesFirstTime()
+    drawRectsFirstTime()
     drawEnemiesFirstTime()
 }
 function drawMechanicsLines()
@@ -60,21 +56,11 @@ function drawMechanicsLines()
     }
     let mechanics = 
     [
-        /*{
-            points: [screen.whereMove, 0.2 * height, screen.whereMove, 0.8 * height],
-            strokeWidth: 3,
-            opacity: 1
-        },*/
         {
             points: floorPoints([screen.whenceMove, 0.2 * height, screen.whenceMove, 0.8 * height]),
             strokeWidth: 3,
             opacity: 0.5
-        }/*,
-        {
-            points: [screen.lastBarrierMove, 0.2 * height, screen.lastBarrierMove, 0.8 * height],
-            strokeWidth: 5,
-            opacity: 1
-        }*/
+        }
     ]
     for (let i = 0; i < mechanics.length; ++i)
     {

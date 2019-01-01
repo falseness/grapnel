@@ -19,22 +19,28 @@
         <script src = "gameoptions.js"></script>
         
         <script src = "createObjectsByModel/createLineObject.js"></script>
+        <script src = "createObjectsByModel/createRectObject.js"></script>
         
         <script src = "collision/circlewithline.js"></script>
         <script src = "collision/linewithline.js"></script>
         
         <script src = "sprites/sprite.js"></script>
         <script src = "sprites/element.js"></script>
+        
         <script src = "sprites/ninja.js"></script>
         <script src = "sprites/grapnel.js"></script>
+        
+        <script src = "sprites/rect.js"></script>
+        <script src = "sprites/side.js"></script>
+        
         <script src = "sprites/create.js"></script>
-        <script src = "sprites/obstacle.js"></script>
+
         <script src = "sprites/enemy.js"></script>
         <script src = "sprites/trampoline.js"></script>
         
         <script src = "physics.js"></script>
         
-        <script src = "obstacles/generate.js"></script>
+        <script src = "rects/generate.js"></script>
         
         <script src = "enemies/generate.js"></script>
         
@@ -83,7 +89,7 @@
                 layer.scoreText.draw()
                 
                 deltaX = 0
-                obstacles.setX(deltaX)
+                rects.setX(deltaX)
                 enemies.setX(deltaX)
                 trampolines.setX(deltaX)
                 
@@ -107,12 +113,6 @@
                 
                 startDrawAnimations()
                 
-                
-                /*ninjaAnim = new Konva.Animation(function(frame)
-                {
-                    ninja.move()
-                    ninja.collision()
-                }, layer.ninja)*/
                 requestAnimationFrame(gameLoop)
             }
 

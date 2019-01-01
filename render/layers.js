@@ -3,7 +3,7 @@ let layer =
 {
     grapnel: new Konva.Layer(),
     static: new Konva.Layer(),
-    obstacles: new Konva.Layer(),
+    rects: new Konva.Layer(),
     ninja: new Konva.Layer(),
     mechanics: new Konva.Layer(),
     scoreText: new Konva.Layer(),
@@ -25,7 +25,7 @@ function addSpritesToLayers()
     layer.static.add(sprites[0].object, sprites[1].object)
     layer.grapnel.add(grapnel.object)
     
-    layer.obstacles.add(obstacles)
+    layer.rects.add(rects)
     
     layer.enemies.add(enemies)
     layer.trampolines.add(trampolines)

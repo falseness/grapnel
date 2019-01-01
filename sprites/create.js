@@ -9,6 +9,8 @@ let ninja = new Ninja(new Konva.Circle({
     transformsEnabled: 'position',
     listening: false
 }))
+ninja.object.cache()
+
 let grapnel = new Grapnel(new Konva.Line({
     points: [0, 0, 0, 0],
     stroke: 'red',
@@ -35,11 +37,14 @@ scoreText.count = 0
 
 let deltaX = 0
 
-let obstacles = new Konva.Group(
+let rects = new Konva.Group(
 {
-    x: 0,
-    y: 0,
-    rotation: 0
+    x:                  0           ,
+    y:                  0           ,
+    rotation:           0           ,
+    perfectDrawEnabled: false       ,
+    transformsEnabled: 'position'   ,
+    listening:          false
 })
 
 let enemies = new Konva.Group(
@@ -74,18 +79,13 @@ let sides =
 for (let i = 0; i < sides.length; ++i)
 {
     const sidesColor = '#f0f0f0'
-    sprites.push(new Sprite(new Konva.Line({
-        points: floorPoints([sides[i].x, sides[i].y, 
-              sides[i].x + sides[i].width, sides[i].y, 
-              sides[i].x + sides[i].width, sides[i].y + sides[i].height,
-              sides[i].x, sides[i].y + sides[i].height]),
-        fill: sidesColor,
-        stroke: 'black',
-        strokeWidth: 1,
-        closed: true,
-        perfectDrawEnabled: false,
-        transformsEnabled: 'position',
-        listening: false
+    sprites.push(new Side(createRectByModel(
+    {
+        x: sides[i].x, 
+        y: sides[i].y,
+        width: sides[i].width,
+        height: sides[i].height,
+        color: sidesColor
     })))
 }
 
