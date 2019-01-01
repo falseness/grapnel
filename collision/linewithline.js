@@ -1,17 +1,43 @@
+function circlesDoNotIntersect(x1, y1, x2, y2, r1, r2)
+{
+    return  Math.pow(x1 - x2, 2) +
+            Math.pow(y1 - y2, 2) > Math.pow(r1 + r2, 2)
+}
+function circlesDescribedAroundTwoVerticalsDoNotIntersect(y1, y2, r1, r2)
+{
+    return  Math.abs(y1 - y2) <= (r1 + r2)
+}
 function pointOnLine(x, x1, x2)
 {
     return ((x < x1 && x2 < x) || (x < x2 && x1 < x))
 }
 function collisionVerticalWithLine(vertical, line)
 {
+    if (    
+            circlesDoNotIntersect
+            (
+                line.center.x, line.center.y,
+                vertical.center.x, vertical.center.y,
+                line.radius, vertical.radius
+            )
+        )
+        return false
+    
     let y = line.k  * vertical.x + line.b
     if (pointOnLine(y, vertical.y1, vertical.y2) && pointOnLine(vertical.x, line.x1, line.x2))
         return {x: vertical.x, y: y}
     return false
 }
 function collisionVerticalWithVertical(vertical1, vertical2)
-{
-    if (vertical1.x == vertical2.x)
+{   
+    if ( 
+            vertical1.x == vertical2.x && 
+            circlesDescribedAroundTwoVerticalsDoNotIntersect
+            (
+                vertical1.center.y  , vertical2.center.y, 
+                vertical1.radius    , vertical2.radius
+            )
+       )
     {
         if (pointOnLine(vertical1.y1, vertical2.y1, vertical2.y2))
             return {x: vertical1.x, y: vertical1.y}
@@ -26,6 +52,19 @@ function collisionVerticalWithVertical(vertical1, vertical2)
 }
 function collisionLineWithLine(line1, line2)
 {
+    if (    
+            circlesDoNotIntersect
+            (
+                line1.center.x, line1.center.y,
+                line2.center.x, line2.center.y,
+                line1.radius, line2.radius
+            )
+        )
+        return false
+    if (Math.pow(line1.center.x - line2.center.x, 2) +
+        Math.pow(line1.center.y - line2.center.y, 2) > Math.pow(line1.radius + line2.radius, 2))
+        return false
+    
     
     if (line1.k != line2.k)
     {
@@ -43,12 +82,18 @@ function lineFormula(x1, y1, x2, y2)
 {
     if (x1 == x2)
     {
-        return {type: 'vertical', x: x1, y1: y1, y2: y2}
+        let res     = {type: 'vertical', x: x1, y1: y1, y2: y2, 
+                        center: {x: x1, y: (y1 + y2) / 2}}
+        res.radius  = Math.abs(y1 - res.center.y)
+        return res
     }
     else
     {
-        let k = ((y1 - y2) / (x1 - x2))
-        return {type: 'line', x1: x1, x2: x2, y1: y1, y2: y2, k: k, b: (y1 - k * x1)}
+        let k       = ((y1 - y2) / (x1 - x2))
+        let res     = {type: 'line', x1: x1, x2: x2, y1: y1, y2: y2, k: k, b: (y1 - k * x1),
+                        center: {x: (x1 + x2) / 2, y: (y1 + y2) / 2}}
+        res.radius  = Math.sqrt(Math.pow(x1 - res.center.x, 2) + Math.pow(y1 -  res.center.y, 2))
+        return res
     }
 }
 function linesCollision(line1, line2)
