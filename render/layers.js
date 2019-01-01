@@ -1,14 +1,14 @@
-let ninjaLayer = new Konva.Layer()
+
 let layer = 
 {
     grapnel: new Konva.Layer(),
-    static: new Konva.Layer(),
-    rects: new Konva.Layer(),
-    ninja: new Konva.Layer(),
-    mechanics: new Konva.Layer(),
-    scoreText: new Konva.Layer(),
-    triangles: new Konva.Layer(),
-    trampolines: new Konva.Layer()
+    static: new Konva.FastLayer(),
+    rects: new Konva.FastLayer(),
+    ninja: new Konva.FastLayer(),
+    mechanics: new Konva.FastLayer(),
+    scoreText: new Konva.FastLayer(),
+    triangles: new Konva.FastLayer(),
+    trampolines: new Konva.FastLayer()
 }
 
 function addLayersToStage()
@@ -25,10 +25,10 @@ function addSpritesToLayers()
     layer.static.add(sprites[0].object, sprites[1].object)
     layer.grapnel.add(grapnel.object)
     
-    layer.rects.add(rects)
+  /*  layer.rects.add(rects)
     
     layer.triangles.add(triangles)
-    layer.trampolines.add(trampolines)
+    layer.trampolines.add(trampolines)*/
     
     layer.scoreText.add(scoreText)
 }

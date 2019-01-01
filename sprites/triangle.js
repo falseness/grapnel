@@ -48,7 +48,7 @@ class Triangle extends Element
         if (this.getTopPointY() < triangleRestriction.top || this.getBottomPointY() > triangleRestriction.bottom)
             this.speedY *= -1
     }
-    moveObject()
+    moveObjectY()
     {
         this.object.setY(this.getY())
     }

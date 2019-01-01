@@ -9,7 +9,7 @@ class Grapnel extends Sprite
         this.throwed = false
         
         this.grappled = false
-        this.pos = [[this.x, this.y, new Empty()]]
+        this.pos = []
     }
     move()
     {

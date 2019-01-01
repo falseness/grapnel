@@ -40,7 +40,11 @@ class Element
         array[indexInArray].object.destroy()
         array.splice(indexInArray, 1)
     }
-    moveObject()
+    moveObjectX()
+    {
+        this.object.setX(this.getX())
+    }
+    moveObjectY()
     {
         
     }

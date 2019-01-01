@@ -37,30 +37,6 @@ scoreText.count = 0
 
 let deltaX = 0
 
-let rects = new Konva.Group(
-{
-    x:                  0           ,
-    y:                  0           ,
-    rotation:           0           ,
-    perfectDrawEnabled: false       ,
-    transformsEnabled: 'position'   ,
-    listening:          false
-})
-
-let triangles = new Konva.Group(
-{
-    x: 0,
-    y: 0,
-    rotation: 0
-})
-
-let trampolines = new Konva.Group(
-{
-    x: 0,
-    y: 0,
-    rotation: 0
-})
-
 let sides = 
 [
     {

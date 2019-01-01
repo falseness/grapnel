@@ -56,4 +56,8 @@ class Trampoline extends Element
         else
             console.log('collision with trampoline error')
     }
+    moveObjectX()
+    {
+        this.object.setX(deltaX)
+    }
 }

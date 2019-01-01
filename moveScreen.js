@@ -9,6 +9,10 @@ class Screen
         
         this.speed = 0
     }
+    isMoving()
+    {
+        return this.speed
+    }
     move()
     {
         /*for (let i = sides.length; i < sprites.length; ++i)

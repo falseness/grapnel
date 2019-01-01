@@ -7,35 +7,37 @@ let draw =
     }, layer.ninja),
     grapnel: new Konva.Animation(function(frame)
     {
+        /*if (!grapnel.throwed)
+            return false*/
         grapnel.object.points(grapnel.getObjectPoints())
     }, layer.grapnel),
     rects: new Konva.Animation(function(frame)
     {
-        if (!screen.speed)
+        if (!screen.isMoving())
             return false
-        
-        rects.setX(deltaX)
     }, layer.rects),
     triangles: new Konva.Animation(function(frame)
     {
-        for (let i = sides.length; i < sprites.length; ++i)
+        if (!screen.isMoving())
         {
-            sprites[i].moveObject()
+            for (let i = sides.length; i < sprites.length; ++i)
+            {
+                sprites[i].moveObjectY()
+            }
         }
-        
-        triangles.setX(deltaX)
+        else
+        {
+            for (let i = sides.length; i < sprites.length; ++i)
+            {
+                sprites[i].moveObjectX()
+                sprites[i].moveObjectY()
+            }
+        }
     }, layer.triangles),
-    /*enemies: new Konva.Animation(function(frame)
-    {
-        for (let i = sides.length; i < sprites.length; ++i)
-        {
-            sprites[i].moveObject()
-        }
-        enemies.setX(deltaX)
-    }, layer.enemies),*/
     trampolines: new Konva.Animation(function(frame)
     {
-        trampolines.setX(deltaX)
+        if (!screen.isMoving())
+            return false
     }, layer.trampolines)
 }
 function drawStaticLayers()
@@ -43,18 +45,11 @@ function drawStaticLayers()
     layer.static.draw()
     layer.mechanics.draw()
 }
-function drawRectsFirstTime()
-{
-    layer.rects.draw()
-}
-function drawEnemiesFirstTime()
-{
-    layer.triangles.draw()
-}
 function drawElementsFirstTime()
 {
-    drawRectsFirstTime()
-    drawEnemiesFirstTime()
+    layer.rects.draw()
+    layer.triangles.draw()
+    layer.trampolines.draw()
 }
 function drawMechanicsLines()
 {

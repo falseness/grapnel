@@ -17,7 +17,7 @@ const triangleRestriction =
     }
     return res
 }*/
-function generateTriangle(x, group)
+function generateTriangle(x, layer)
 {    
     
     
@@ -33,7 +33,7 @@ function generateTriangle(x, group)
     {
         sprites[sprites.length - 1].speedY *= -1
     }
-    group.add(sprites[sprites.length - 1].object)
+    layer.add(sprites[sprites.length - 1].object)
     
     let generatedElementsNumber = 1
     return generatedElementsNumber

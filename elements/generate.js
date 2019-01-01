@@ -10,7 +10,7 @@ function generate(x)
     
     if (num < generateChancePercent.rects)
     {
-        let generatedElementsNumber = generateRect(x, rects)
+        let generatedElementsNumber = generateRect(x, layer.rects)
         return generatedElementsNumber
     }
     
@@ -18,13 +18,13 @@ function generate(x)
     if (generateChancePercent.rects <= num && 
              num < generateChancePercent.rects + generateChancePercent.triangles)
     {
-        let generatedElementsNumber = generateTriangle(x, triangles)
+        let generatedElementsNumber = generateTriangle(x, layer.triangles)
         return generatedElementsNumber
     }
     if (generateChancePercent.rects + generateChancePercent.triangles <= num &&
         generateChancePercent.rects + generateChancePercent.triangles + generateChancePercent.trampolines)
     {
-        let generatedElementsNumber = generateTrampoline(x, trampolines)
+        let generatedElementsNumber = generateTrampoline(x, layer.trampolines)
         return generatedElementsNumber
     }
     console.log("Error generate")

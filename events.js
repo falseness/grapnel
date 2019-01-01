@@ -14,9 +14,6 @@ function createEvents()
     }
     function pickUpGrapnel()
     {
-        //grapnel.x = NaN
-        //grapnel.y = NaN
-        
         grapnel.object.remove()
         
         grapnel.setGrappled(false)
