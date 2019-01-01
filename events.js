@@ -2,8 +2,6 @@ function createEvents()
 {
     function throwGrapnel()
     {
-        grapnel.x = ninja.x
-        grapnel.y = ninja.y
         grapnel.pos = [[ninja.x, ninja.y, new Empty()]]
         let ratio = grapnel.calcSpeed(stage.getPointerPosition())
         grapnel.speedY = ratio.sin * grapnelSpeed// + ninja.speedY

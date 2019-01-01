@@ -23,16 +23,11 @@ class Grapnel extends Sprite
                     this.pos[i][1] += this.speedY
                 }
             }
-           /* this.x += this.speedX
-            this.y += this.speedY*/
+            
             for (let i = 0; i < this.pos.length; ++i)
             {
                 this.pos[i][1] += this.pos[i][2].speedY
             }
-            /*if (this.grappled)
-            {
-                this.y += this.grappled.speedY
-            }*/
         }
     }
     calcSpeed(direction)

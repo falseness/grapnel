@@ -62,8 +62,6 @@
             
             function reStart()
             {
-                grapnel.x = NaN
-                grapnel.y = NaN
                 grapnel.pos = []
                 grapnel.speedX = 0
                 grapnel.speedY = 0
@@ -73,6 +71,7 @@
                 ninja.y = Math.floor(0.2 * height)
                 ninja.speedX = 0
                 ninja.speedY = 0
+                
                 for (let i = sides.length; i < sprites.length; ++i)
                 {
                     sprites[i].object.destroy()
@@ -93,7 +92,7 @@
             }
             function startGame()
             {
-                //Konva.pixelRatio = 1
+                Konva.pixelRatio = 1
                 
                 addLayersToStage()
                 addSpritesToLayers()
