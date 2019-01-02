@@ -22,15 +22,29 @@ let draw =
         {
             for (let i = sides.length; i < sprites.length; ++i)
             {
-                sprites[i].moveObjectY()
+                if (sprites[i].isToRightThanEdgeOfScreen())
+                    sprites[i].hide()
+                else
+                    {
+                        sprites[i].moveObjectY()
+                        
+                        sprites[i].show()
+                    }
             }
         }
         else
         {
             for (let i = sides.length; i < sprites.length; ++i)
             {
-                sprites[i].moveObjectX()
-                sprites[i].moveObjectY()
+                if (sprites[i].isToRightThanEdgeOfScreen())
+                    sprites[i].hide()
+                else
+                {
+                    sprites[i].moveObjectX()
+                    sprites[i].moveObjectY()
+                    
+                    sprites[i].show()
+                }                    
             }
         }
     }, layer.triangles),

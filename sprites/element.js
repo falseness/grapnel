@@ -15,6 +15,18 @@ class Element
     {
         
     }
+    hide()
+    {
+        this.object.hide()
+    }
+    show()
+    {
+        this.object.show()
+    }
+    isToRightThanEdgeOfScreen()
+    {
+        return this.getLeftPointX() > width
+    }
     moveX(speed)
     {
         this.x += speed

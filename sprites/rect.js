@@ -50,6 +50,10 @@ class Rect extends Element
     {
         return this.getX() + this.object.attrs.width
     }
+    getLeftPointX()
+    {
+        return this.getX()
+    }
     isPairElement()
     {
         return true

@@ -12,11 +12,15 @@ class Trampoline extends Element
             y: 0
         }
         
-        this.rightPointX = this.object.attrs.points[0]
+        this.rightPointX    = this.object.attrs.points[0]
+        this.leftPointX     = this.object.attrs.points[0]
+        
         for (let i = 0; i < this.object.attrs.points.length; i += 2)
         {
             if (this.object.attrs.points[i] > this.rightPointX)
                 this.rightPointX = this.object.attrs.points[i]
+            if (this.object.attrs.points[i] < this.leftPointX)
+                this.leftPointX = this.object.attrs.points[i]
             
             this.circle.x += this.object.attrs.points[i]
             this.circle.y += this.object.attrs.points[i + 1]
@@ -65,13 +69,17 @@ class Trampoline extends Element
     {
         return this.rightPointX
     }
+    getLeftPointX()
+    {
+        return this.leftPointX
+    }
     moveX(speed)
     {
         super.moveX(speed)
         
         this.rightPointX    += speed
+        this.leftPointX     += speed
         this.circle.x       += speed
-        this.dx             += speed
     }
     collision(who, line)
     {

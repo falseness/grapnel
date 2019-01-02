@@ -42,6 +42,10 @@ class Triangle extends Element
     {
         return this.getX() + this.side / 2
     }
+    getLeftPointX()
+    {
+        return this.getX() - this.side / 2
+    }
     getTopPointY()
     {
         return this.getY() - this.height * (1 / 3)
