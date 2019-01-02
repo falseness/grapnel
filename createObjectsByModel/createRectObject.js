@@ -14,7 +14,9 @@ function createRectByModel(model)
         strokeWidth:        model.strokeWidth   ,
         perfectDrawEnabled: false               ,
         transformsEnabled: 'position'           ,
-        listening:          false
+        listening: false                        ,
+        strokeHitEnabled: false                 ,
+        shadowForStrokeEnabled: false
     })
     //object.cache()
     return object

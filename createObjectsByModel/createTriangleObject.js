@@ -14,8 +14,9 @@ function createTriangleByModel(model)
         strokeWidth: model.strokeWidth  ,
         rotation: 60                    ,
         perfectDrawEnabled: false       ,
-        listening:          false
+        listening:          false       ,
+        strokeHitEnabled: false         ,
+        shadowForStrokeEnabled: false
         })
-    //object.cache()
     return object
 }
