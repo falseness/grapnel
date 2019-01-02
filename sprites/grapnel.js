@@ -46,6 +46,8 @@ class Grapnel extends Sprite
     { 
         for (let q = 1; q <= this.pos.length; ++q)
         {
+            if (q > 5)
+                console.log('error')
             let grapnelLine
             if (q == this.pos.length)
                 grapnelLine = lineFormula(ninja.x, ninja.y, this.pos[this.pos.length - 1][0], this.pos[this.pos.length - 1][1])

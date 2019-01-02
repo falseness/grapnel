@@ -11,13 +11,17 @@ class Element
         this.y = object.attrs.y
 
     }
-    move()
+    moveY()
     {
         
     }
+    moveX(speed)
+    {
+        this.x += speed
+    }
     getX()
     {
-        return this.x + deltaX
+        return this.x
     }
     getY()
     {

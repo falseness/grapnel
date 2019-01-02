@@ -4,16 +4,15 @@ function physics()
 {
     ninja.speedY += GRAVITY
     
-    
-   
-    /*screen.shouldStartMoveByBarrier()*/
-    screen.shouldStartMove()
-    
-    
-    screen.move()
-    for (let i = 0; i < sprites.length; ++i)
+    if (screen.shouldStartMove())
+        screen.move()
+    else 
     {
-        sprites[i].move()
+        //moveY есть в screen.move() для оптимизации, поэтому else
+        for (let i = sides.length; i < sprites.length; ++i)
+        {
+            sprites[i].moveY()
+        }
     }
     
     

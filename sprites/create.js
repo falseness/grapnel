@@ -35,8 +35,6 @@ let scoreText = new Konva.Text({
 scoreText.count = 0
 
 
-let deltaX = 0
-
 let sides = 
 [
     {

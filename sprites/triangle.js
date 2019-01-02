@@ -4,23 +4,18 @@ class Triangle extends Element
     {
         super(object)
     
-        this.deltaY =   0
         this.speedY =   0.005 * height
         this.side   =   this.object.attrs.radius * Math.sqrt(3)
         this.height =   this.side * Math.sin(Math.PI / 3)
     }
     getCircumscribedCircle()
     {
-        return {x: this.x + deltaX, y: this.y + this.deltaY, radius: this.object.attrs.radius}
+        return {x: this.x, y: this.y, radius: this.object.attrs.radius}
     }
-    move()
+    moveY()
     {
         this.changeSpeed()
-        this.deltaY += this.speedY
-    }
-    getY()
-    {
-        return this.y + this.deltaY
+        this.y += this.speedY
     }
     getRightPointX()
     {
@@ -28,7 +23,7 @@ class Triangle extends Element
     }
     getTopPointY()
     {
-        return this.getY() - this.height * 1 / 3
+        return this.getY() - this.height * (1 / 3)
     }
     getBottomPointY()
     {

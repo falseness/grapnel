@@ -1,7 +1,7 @@
 
 function pointOnLine(x, x1, x2)
 {
-    return ((x <= x1 && x2 <= x) || (x <= x2 && x1 <= x))
+    return ((x < x1 && x2 < x) || (x < x2 && x1 < x))
 }
 function collisionVerticalWithLine(vertical, line)
 {

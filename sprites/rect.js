@@ -12,7 +12,7 @@ class Rect extends Element
     }
     getCircumscribedCircle()
     {
-        return {x: this.circle.x + deltaX, y: this.circle.y, radius: this.circle.radius}
+        return this.circle
     }
     getPoints()
     {   
@@ -31,6 +31,11 @@ class Rect extends Element
         ]
         
         return points
+    }
+    moveX(speed)
+    {
+        super.moveX(speed)
+        this.circle.x       += speed
     }
     getRightPointX()
     {

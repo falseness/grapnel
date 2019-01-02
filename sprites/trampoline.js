@@ -4,7 +4,7 @@ class Trampoline extends Element
     {
         super(object)
         
-        this.x = this.object.attrs.points[0]
+        this.x = 0
         
         this.circle = 
         {
@@ -34,22 +34,33 @@ class Trampoline extends Element
         }
         this.circle.radius = Math.sqrt(r)
     }
+    getX()
+    {
+        return this.object.attrs.points[0] + this.x
+    }
     getCircumscribedCircle()
     {
-        return {x: this.circle.x + deltaX, y: this.circle.y, radius: this.circle.radius}
+        return this.circle
     }
     getPoints()
     {
-        let points = this.object.attrs.points.slice()
-        for (let i = 0; i < points.length; i += 2)
+        let res = this.object.attrs.points.slice()
+        for (let i = 0; i < res.length; i += 2)
         {
-            points[i] += deltaX
+            res[i] += this.x
         }
-        return points
+        return res
     }
     getRightPointX()
     {
-        return this.rightPointX + deltaX
+        return this.rightPointX
+    }
+    moveX(speed)
+    {
+        super.moveX(speed)
+        this.rightPointX    += speed
+        this.circle.x       += speed
+        this.dx             += speed
     }
     collision(who, line)
     {
@@ -82,6 +93,6 @@ class Trampoline extends Element
     }
     moveObjectX()
     {
-        this.object.setX(deltaX)
+        this.object.setX(this.x)
     }
 }

@@ -2,8 +2,8 @@ function generate(x)
 {
     const generateChancePercent = 
     {
-        rects: 40,
-        triangles: 35,
+        rects: 40,//40,
+        triangles: 35,//35,
         trampolines: 25
     }
     let num = random()

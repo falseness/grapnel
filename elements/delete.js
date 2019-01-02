@@ -24,7 +24,7 @@ function deleteElements()
         {
             sprites[i].delete(i, sprites)
     
-            newElements += generate(sprites[sprites.length - 1].x + (rectIndent + rectWidth))
+            newElements += generate(sprites[sprites.length - 1].getX() + (rectIndent + rectWidth))
             
             changeScoreText()
         }
