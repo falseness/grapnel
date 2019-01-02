@@ -46,10 +46,6 @@ class Grapnel extends Sprite
     { 
         for (let q = 1; q <= this.pos.length; ++q)
         {
-            if (q > 10)
-            {
-                console.log('ERROR!!!' + q)
-            }
             let grapnelLine
             if (q == this.pos.length)
                 grapnelLine = lineFormula(ninja.x, ninja.y, this.pos[this.pos.length - 1][0], this.pos[this.pos.length - 1][1])
@@ -58,9 +54,7 @@ class Grapnel extends Sprite
             
             for (let i = 0; i < sprites.length; ++i)
             {
-                circlesIntersect(this.x, this.y, this.radius, sprites[i].getCircumscribedCircle())
-                if (circlesIntersect(grapnelLine.center.x, grapnelLine.center.y, 
-                                     grapnelLine.radius, sprites[i].getCircumscribedCircle()))
+                if (circlesIntersect(grapnelLine.circle, sprites[i].getCircumscribedCircle()))
                 {
                     let points = sprites[i].getPoints()
 
