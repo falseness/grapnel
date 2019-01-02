@@ -12,18 +12,12 @@ class Ninja extends Sprite
         {
             if (twoCirclesIntersect(this.x, this.y, this.radius, sprites[i].getCircumscribedCircle()))
             {
-                let points = sprites[i].getPoints()
-                let length = points.length
-                for (let j = 0; j <= length - 4; j += 2)
+                let lines = sprites[i].getLines()
+                for (let j = 0; j < lines.length; ++j)
                 {
-                    let line = lineFormula(points[j], points[j + 1],
-                                        points[j + 2], points[j + 3])
-                    if (this.collisionNinjaWithLine(line))
-                        sprites[i].collision(this, line)
+                    if (this.collisionNinjaWithLine(lines[j]))
+                        sprites[i].collision(this, lines[j])
                 }
-                let line = lineFormula(points[length - 2], points[length - 1], points[0], points[1])
-                if (this.collisionNinjaWithLine(line))
-                    sprites[i].collision(this, line)
             }
         }
     }

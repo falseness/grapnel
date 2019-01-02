@@ -18,6 +18,18 @@ class Element
     moveX(speed)
     {
         this.x += speed
+        
+        this.moveLinesX(speed)
+    }
+    moveLinesX(speed)
+    {
+        for (let i = 0; i < this.lines.length; ++i)
+        {
+            this.lines[i].x1        += speed
+            this.lines[i].x2        += speed
+            this.lines[i].circle.x  += speed
+            this.lines[i].b         -= speed * this.lines[i].k
+        }
     }
     getX()
     {
@@ -26,6 +38,10 @@ class Element
     getY()
     {
         return this.y
+    }
+    getLines()
+    {
+        return this.lines
     }
     collision()
     {

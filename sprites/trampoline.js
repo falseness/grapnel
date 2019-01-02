@@ -11,6 +11,7 @@ class Trampoline extends Element
             x: 0,
             y: 0
         }
+        
         this.rightPointX = this.object.attrs.points[0]
         for (let i = 0; i < this.object.attrs.points.length; i += 2)
         {
@@ -33,6 +34,15 @@ class Trampoline extends Element
                 r = t
         }
         this.circle.radius = Math.sqrt(r)
+        
+        this.lines = [lineFormula(this.object.attrs.points[this.object.attrs.points.length - 2],
+                                    this.object.attrs.points[this.object.attrs.points.length - 1],
+                                    this.object.attrs.points[0], this.object.attrs.points[1])]
+        for (let i = 0; i <= this.object.attrs.points.length - 4; i += 2)
+        {
+            this.lines.push(lineFormula(this.object.attrs.points[i], this.object.attrs.points[i + 1],
+                            this.object.attrs.points[i + 2], this.object.attrs.points[i + 3]))
+        }
     }
     getX()
     {
@@ -58,6 +68,7 @@ class Trampoline extends Element
     moveX(speed)
     {
         super.moveX(speed)
+        
         this.rightPointX    += speed
         this.circle.x       += speed
         this.dx             += speed

@@ -7,16 +7,16 @@ function collisionVerticalWithLine(vertical, line)
 {
     if (circlesIntersect(line.circle, vertical.circle))
     { 
-        let y = line.k  * vertical.x + line.b
-        if (pointOnLine(y, vertical.y1, vertical.y2) && pointOnLine(vertical.x, line.x1, line.x2))
-            return {x: vertical.x, y: y}
+        let y = line.k  * vertical.x1 + line.b
+        if (pointOnLine(y, vertical.y1, vertical.y2) && pointOnLine(vertical.x1, line.x1, line.x2))
+            return {x: vertical.x1, y: y}
     }
     return false
 }
 function collisionVerticalWithVertical(vertical1, vertical2)
 {   
     if ( 
-            vertical1.x == vertical2.x && 
+            vertical1.x1 == vertical2.x1 && 
             circlesCircumscribedAroundTwoVerticalsIntersect
             (
                 vertical1.circle.y      , vertical2.circle.y, 
@@ -25,13 +25,13 @@ function collisionVerticalWithVertical(vertical1, vertical2)
        )
     {
         if (pointOnLine(vertical1.y1, vertical2.y1, vertical2.y2))
-            return {x: vertical1.x, y: vertical1.y}
+            return {x: vertical1.x1, y: vertical1.y}
         if (pointOnLine(vertical1.y2, vertical2.y1, vertical2.y2))
-            return {x: vertical1.x, y: vertical1.y2}
+            return {x: vertical1.x1, y: vertical1.y2}
         if (pointOnLine(vertical2.y1, vertical1.y1, vertical1.y2))
-            return {x: vertical1.x, y: vertical2.y1}
+            return {x: vertical1.x1, y: vertical2.y1}
         if (pointOnLine(vertical2.y2, vertical1.y1, vertical1.y2))
-            return {x: vertical1.x, y: vertical2.y2}
+            return {x: vertical1.x1, y: vertical2.y2}
     }
     return false
 }
@@ -56,7 +56,7 @@ function lineFormula(x1, y1, x2, y2)
     if (x1 == x2)
     {
         // y2 < y1
-        let res     = {type: 'vertical', x: x1, y1: Math.max(y1, y2), y2: Math.min(y2, y1), 
+        let res     = {type: 'vertical', x1: x1, x2: x1, y1: Math.max(y1, y2), y2: Math.min(y2, y1), 
                         circle: {x: x1, y: (y1 + y2) / 2}}
         res.circle.radius  = res.y1 - res.circle.y
         return res
@@ -85,7 +85,7 @@ function pointIsOnStraight(point, line)
 {
     if (line.type == 'vertical')
     {
-        return (line.x == point.x)
+        return (line.x1 == point.x)
     }
     else if (line.type == 'line')
     {

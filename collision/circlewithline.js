@@ -31,9 +31,9 @@ function collisionCircleWithLine(line, x0, y0, r)
     return false
 }
     
-function collisionCircleWithVertical(coord0, coordUnknow0, r, line)
+function collisionCircleWithVertical(coord0, coordUnknow0, r, vertical)
 {
-    let c = Math.pow(r, 2) - Math.pow((line.x - coord0), 2) - Math.pow(coordUnknow0, 2)
+    let c = Math.pow(r, 2) - Math.pow((vertical.x1 - coord0), 2) - Math.pow(coordUnknow0, 2)
     coordUnknow02 = coordUnknow0 * 2
     let D = Math.pow(coordUnknow02, 2) + 4 * c
     if (D >= 0)
@@ -42,8 +42,8 @@ function collisionCircleWithVertical(coord0, coordUnknow0, r, line)
         let root1 = (coordUnknow02 - D) / 2
         let root2 = (coordUnknow02 + D) / 2
         {
-            if (line.y2 <= root1 && root1 <= line.y1
-               || line.y2 <= root2 && root2 <= line.y1)
+            if (vertical.y2 <= root1 && root1 <= vertical.y1
+               || vertical.y2 <= root2 && root2 <= vertical.y1)
                 return true
         }
     }

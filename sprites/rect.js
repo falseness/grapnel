@@ -9,6 +9,15 @@ class Rect extends Element
             y: this.y + object.attrs.height / 2
         }
         this.circle.radius = Math.sqrt(Math.pow(this.circle.x - this.x, 2) + Math.pow(this.circle.y - this.y, 2))
+        
+        
+        let points = this.getPoints()
+        this.lines = [lineFormula(points[points.length - 2], 
+                                    points[points.length - 1], points[0], points[1])]
+        for (let i = 0; i <= points.length - 4; i += 2)
+        {
+            this.lines.push(lineFormula(points[i], points[i + 1], points[i + 2], points[i + 3]))
+        }
     }
     getCircumscribedCircle()
     {
@@ -35,7 +44,7 @@ class Rect extends Element
     moveX(speed)
     {
         super.moveX(speed)
-        this.circle.x       += speed
+        this.circle.x += speed
     }
     getRightPointX()
     {
