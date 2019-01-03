@@ -7,14 +7,14 @@ function createEvents()
         grapnel.speedY = ratio.sin * grapnelSpeed// + ninja.speedY
         grapnel.speedX = ratio.cos * grapnelSpeed// + ninja.speedX
         
-        layer.grapnel.add(grapnel.object)        
+        grapnel.object.show()      
         
         grapnel.throwed = true
         grapnel.grappled = false    
     }
     function pickUpGrapnel()
     {
-        grapnel.object.remove()
+        grapnel.object.hide()
         
         grapnel.setGrappled(false)
         grapnel.throwed = false
