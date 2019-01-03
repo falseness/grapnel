@@ -16,11 +16,11 @@ function createEvents()
         grapnel.throwed = false
     }
     
-    canvas.addEventListener('mousedown', throwGrapnel)
-    canvas.addEventListener('mouseup', pickUpGrapnel)
+    document.addEventListener('mousedown', throwGrapnel)
+    document.addEventListener('mouseup', pickUpGrapnel)
     
-    canvas.addEventListener('touchstart', throwGrapnel)
-    canvas.addEventListener('touchend', pickUpGrapnel)
+    document.addEventListener('touchstart', throwGrapnel)
+    document.addEventListener('touchend', pickUpGrapnel)
 }
 function mouseCoords(event)
 {
