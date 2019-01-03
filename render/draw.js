@@ -4,11 +4,14 @@
     grapnel.draw()
     ninja.draw()
     
-    for (let i = 0; i < elements.length; ++i)
+    for (let i = sides.length; i < elements.length; ++i)
     {
         elements[i].draw()
     }
-    
+    for (let i = 0; i < sides.length; ++i)
+    {
+        elements[i].draw()
+    }
     scoreText.draw()
 }
 /*let draw = 
