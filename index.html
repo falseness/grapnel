@@ -16,6 +16,7 @@
         <script src = "konva.min.js"></script>
     </head>
     <body>
+        <canvas id = "canvas"></canvas>
         <script src = "gameoptions.js"></script>
         
         <script src = "createObjectsByModel/createLineObject.js"></script>
@@ -27,7 +28,7 @@
         <script src = "collision/circlewithline.js"></script>
         
         
-        <script src = "sprites/sprite.js"></script>
+        <script src = "sprites/empty.js"></script>
         <script src = "sprites/element.js"></script>
         
         <script src = "sprites/ninja.js"></script>
@@ -43,29 +44,22 @@
         
         <script src = "physics.js"></script>
         
-        <script src = "rects/generate.js"></script>
-        
-        <script src = "triangles/generate.js"></script>
-        
-        <script src = "trampoline/generate.js"></script>
-        
         <script src = "elements/generate.js"></script>
         <script src = "elements/delete.js"></script>
         
         <script src = "moveScreen.js"></script>
         
-        <script src = "render/layers.js"></script>
         <script src = "render/draw.js"></script>
         
         <script src = "events.js"></script>
-        <div id = "container"></div>
         <script>
             'use strict'
-            let stage = new Konva.Stage({
-                container: 'container',
-                width: width,
-                height: height
-            })
+            let canvas = document.getElementById('canvas')
+            let ctx = canvas.getContext('2d')
+            
+            canvas.width = width
+            canvas.height = height
+            
             
             window.onload = startGame()
             
@@ -81,35 +75,19 @@
                 ninja.speedX = 0
                 ninja.speedY = 0
                 
-                for (let i = sides.length; i < sprites.length; ++i)
-                {
-                    sprites[i].object.destroy()
-                }
-                sprites.splice(sides.length, sprites.length - 2)
+                elements.splice(sides.length, elements.length - sides.length)
                 
                 scoreText.count = 0
-                scoreText.setText('score: ' + scoreText.count)
-                layer.scoreText.draw()
                 
                 generatePrimaryElements()
-                drawElementsFirstTime()
             }
             function startGame()
             {
                 Konva.pixelRatio = 1
                 
-                addLayersToStage()
-                addSpritesToLayers()
-                
-                //drawMechanicsLines()
-                drawStaticLayers()
-                
-                
                 generatePrimaryElements()
                 
                 createEvents()
-                
-                startDrawAnimations()
                 
                 requestAnimationFrame(gameLoop)
             }
@@ -117,7 +95,7 @@
             function gameLoop()
             {
                 physics()
-
+                draw()
                 
                 requestAnimationFrame(gameLoop)
             }

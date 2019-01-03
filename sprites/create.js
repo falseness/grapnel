@@ -1,39 +1,19 @@
-let ninja = new Ninja(new Konva.Circle({
+let elements = []
+let ninja = new Ninja(
+{
     x: Math.floor(0.2 * width),
     y: Math.floor(0.2 * height),
     radius: Math.round(0.01 * height),
     fill: '#0000ff',
-    stroke: '#000000',
-    strokeWidth: 1,
-    perfectDrawEnabled: false,
-    transformsEnabled: 'position',
-    listening: false
-}))
+    stroke: '#000000'
+})
 //ninja.object.cache()
 
-let grapnel = new Grapnel(new Konva.Line({
+let grapnel = new Grapnel(
+{
     points: [0, 0, 0, 0],
-    stroke: 'red',
-    strokeWidth: Math.round(0.006 * height),
-    lineJoin: 'round',
-    perfectDrawEnabled: false,
-    transformsEnabled: 'position',
-    listening: false
-}))
-
-let scoreText = new Konva.Text({
-        x: Math.floor(0.1 * width),
-        y: Math.floor(0.02 * height),
-        text: 'score: 0',
-        fontSize: Math.floor(0.05 * height),
-        fontFamily: 'Calibri',
-        fill: 'blue',
-        perfectDrawEnabled: false,
-        transformsEnabled: 'position',
-        listening: false
-    })
-scoreText.count = 0
-
+    stroke: 'red'
+})
 
 let sides = 
 [
@@ -53,7 +33,7 @@ let sides =
 for (let i = 0; i < sides.length; ++i)
 {
     const sidesColor = '#f0f0f0'
-    sprites.push(new Side(createRectByModel(
+    elements.push(new Side(createRectByModel(
     {
         x: sides[i].x, 
         y: sides[i].y,
@@ -62,13 +42,20 @@ for (let i = 0; i < sides.length; ++i)
         color: sidesColor
     })))
 }
-
-function floorPoints(points)
+let scoreText = 
 {
-    let resPoints = []
-    for (let i = 0; i < points.length; ++i)
+    text: 'score: ',
+    count: 0,
+    x: Math.floor(0.1 * width),
+    y: Math.floor(sides[0].height / 2),
+    fontSize: Math.floor(0.05 * height),
+    fontFamily: 'Calibri',
+    fill: 'blue',
+    draw: function()
     {
-        resPoints.push(Math.floor(points[i]))
+        ctx.fillStyle = this.fill
+        ctx.textBaseline = 'middle'
+        ctx.font = this.fontSize + 'px ' + this.fontFamily
+        ctx.fillText(this.text + this.count, this.x, this.y)
     }
-    return resPoints
 }

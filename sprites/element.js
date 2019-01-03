@@ -2,14 +2,14 @@ class Element
 {
     constructor(object)
     {
-        this.object = object
-        
         this.speedX = 0
         this.speedY = 0
         
-        this.x = object.attrs.x
-        this.y = object.attrs.y
+        this.x      = object.x
+        this.y      = object.y
 
+        this.fill   = object.fill
+        this.stroke = object.stroke
     }
     moveY()
     {
@@ -69,15 +69,6 @@ class Element
     }
     delete(indexInArray, array)
     {
-        array[indexInArray].object.destroy()
         array.splice(indexInArray, 1)
-    }
-    moveObjectX()
-    {
-        this.object.setX(this.getX())
-    }
-    moveObjectY()
-    {
-        
     }
 }

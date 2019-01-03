@@ -1,15 +1,16 @@
 const grapnelSpeed = 0.018891687657430732 * height * 2
 const grappleSpeed = 0.00025188916876574307 * height
 
-class Grapnel extends Sprite
+class Grapnel
 {
     constructor(object)
     {
-        super(object)
         this.throwed = false
         
         this.grappled = false
         this.pos = []
+        
+        this.stroke = object.stroke
     }
     move()
     {
@@ -52,20 +53,20 @@ class Grapnel extends Sprite
             else
                 grapnelLine = lineFormula(this.pos[q - 1][0], this.pos[q - 1][1], this.pos[q][0], this.pos[q][1])
             
-            for (let i = 0; i < sprites.length; ++i)
+            for (let i = 0; i < elements.length; ++i)
             {
-                if (circlesIntersect(grapnelLine.circle, sprites[i].getCircumscribedCircle()))
+                if (circlesIntersect(grapnelLine.circle, elements[i].getCircumscribedCircle()))
                 {
-                    let lines = sprites[i].getLines()
+                    let lines = elements[i].getLines()
                     for (let j = 0; j < lines.length; ++j)
                     {
-                        this.grapple(linesCollision(grapnelLine, lines[j]), sprites[i], q)
+                        this.grapple(linesCollision(grapnelLine, lines[j]), elements[i], q)
                     }
                 }
             }
         }
     }
-    correctToCornerOfSprite(x, y, points, eps)
+    correctToCornerOfElement(x, y, points, eps)
     {
         for (let i = 0; i < points.length; i += 2)
         {
@@ -79,13 +80,13 @@ class Grapnel extends Sprite
         let line = lineFormula(point1[0], point1[1], point2[0], point2[1])
         return pointIsOnStraight({x: point3[0], y: point3[1]}, line)
     }
-    grapple(coords, sprite, index)
+    grapple(coords, element, index)
     {
         if (coords.x && coords.y)
         {
             const correctCornerEps = 6
             const firstPointEps = 50
-            coords = this.correctToCornerOfSprite(coords.x, coords.y, sprite.getPoints(), correctCornerEps)
+            coords = this.correctToCornerOfElement(coords.x, coords.y, element.getPoints(), correctCornerEps)
             
             this.grappled = true
             if  (
@@ -94,7 +95,7 @@ class Grapnel extends Sprite
                     isPointsEqually(this.pos[0], [coords.x, coords.y], firstPointEps)
                 )
             {
-                this.pos[0] = [coords.x, coords.y, sprite]
+                this.pos[0] = [coords.x, coords.y, element]
             }
             else if (this.pos.length == index)
             {
@@ -109,7 +110,7 @@ class Grapnel extends Sprite
                         )
                     this.pos.pop()
                     
-                this.pos.push([coords.x, coords.y, sprite])
+                this.pos.push([coords.x, coords.y, element])
             }
             else 
             { 
@@ -123,19 +124,9 @@ class Grapnel extends Sprite
                         )
                     return
 
-                this.pos.splice(index, 0, [coords.x, coords.y, sprite])
+                this.pos.splice(index, 0, [coords.x, coords.y, element])
             }
         }
-    }
-    getObjectPoints()
-    {
-        let res = []
-        for (let i = 0; i < this.pos.length; ++i)
-        {
-            res.push(Math.floor(this.pos[i][0]), Math.floor(this.pos[i][1]))
-        }
-        res.push(Math.floor(ninja.x), Math.floor(ninja.y))
-        return res
     }
     isGrappled()
     {
@@ -145,4 +136,27 @@ class Grapnel extends Sprite
     {
         this.grappled = boolean
     }
+    draw()
+    {
+        if (this.throwed)
+        {
+            ctx.beginPath()
+            
+            ctx.moveTo(this.pos[0][0], this.pos[0][1])
+            
+            for (let i = 1; i < this.pos.length; ++i)
+            {
+                ctx.lineTo(this.pos[i][0], this.pos[i][1])
+            }
+            ctx.lineTo(ninja.x, ninja.y)
+            ctx.strokeStyle = this.stroke
+            
+            const strokeWidth = 4
+            ctx.lineWidth = strokeWidth
+            ctx.stroke()
+            ctx.lineWidth = 1
+            
+            ctx.closePath()
+        }
+    }     
 }

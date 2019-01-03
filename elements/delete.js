@@ -10,21 +10,20 @@
 
 function changeScoreText()
 {
-    scoreText.setText('score: ' + ++scoreText.count)
-    layer.scoreText.draw()
+    scoreText.count++
 }
 
 
 function deleteElements()
 {
     let newElements = 0
-    for (let i = sides.length; i < sprites.length - newElements; ++i)
+    for (let i = sides.length; i < elements.length - newElements; ++i)
     {
-        if (sprites[i].getRightPointX() < 0)
+        if (elements[i].getRightPointX() < 0)
         {
-            sprites[i].delete(i, sprites)
+            elements[i].delete(i, elements)
     
-            newElements += generate(sprites[sprites.length - 1].getX() + (rectIndent + rectWidth))
+            newElements += generate(elements[elements.length - 1].getX() + (rectIndent + rectWidth))
             
             changeScoreText()
         }

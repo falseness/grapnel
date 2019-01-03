@@ -12,8 +12,4 @@ class Side extends Rect
     {
         return this.circle
     }
-    moveX()
-    {
-        console.log('Error moving side!')
-    }
 }

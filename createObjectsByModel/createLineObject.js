@@ -4,18 +4,11 @@ function createLineByModel(model)
     model.strokeColor   = model.strokeColor || 'black'
     model.strokeWidth   = model.strokeWidth || 1
 
-    object = new Konva.Line(
+    object =
     {
         points: model.points            ,
-        fill: model.color               ,
-        stroke: model.strokeColor       ,
-        strokeWidth: model.strokeWidth  ,
-        closed: true                    ,
-        perfectDrawEnabled: false       ,
-        transformsEnabled: 'position'   ,
-        listening: false                ,
-        strokeHitEnabled: false         ,
-        shadowForStrokeEnabled: false
-    })
+        fill:   model.color             ,
+        stroke: model.strokeColor       
+    }
     return object
 }

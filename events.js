@@ -1,28 +1,29 @@
 function createEvents()
 {
-    function throwGrapnel()
+    function throwGrapnel(event)
     {
         grapnel.pos = [[ninja.x, ninja.y, new Empty()]]
-        let ratio = grapnel.calcSpeed(stage.getPointerPosition())
+        let ratio = grapnel.calcSpeed(mouseCoords(event))
         grapnel.speedY = ratio.sin * grapnelSpeed// + ninja.speedY
-        grapnel.speedX = ratio.cos * grapnelSpeed// + ninja.speedX
-        
-        grapnel.object.show()      
+        grapnel.speedX = ratio.cos * grapnelSpeed// + ninja.speedX    
         
         grapnel.throwed = true
         grapnel.grappled = false    
     }
     function pickUpGrapnel()
-    {
-        grapnel.object.hide()
-        
+    {   
         grapnel.setGrappled(false)
         grapnel.throwed = false
     }
     
-    stage.on('mousedown', throwGrapnel)
-    stage.on('mouseup', pickUpGrapnel)
+    canvas.addEventListener('mousedown', throwGrapnel)
+    canvas.addEventListener('mouseup', pickUpGrapnel)
     
-    stage.on('touchstart', throwGrapnel)
-    stage.on('touchend', pickUpGrapnel)
+    canvas.addEventListener('touchstart', throwGrapnel)
+    canvas.addEventListener('touchend', pickUpGrapnel)
+}
+function mouseCoords(event)
+{
+    let rect = canvas.getBoundingClientRect()
+    return {x: event.clientX - rect.left, y: event.clientY - rect.top}
 }

@@ -3,10 +3,14 @@ class Rect extends Element
     constructor(object)
     {
         super(object)
+        
+        this.width = object.width
+        this.height = object.height
+        
         this.circle =
         {
-            x: this.x + object.attrs.width  / 2,
-            y: this.y + object.attrs.height / 2
+            x: this.x + this.width  / 2,
+            y: this.y + this.height / 2
         }
         this.circle.radius = Math.sqrt(Math.pow(this.circle.x - this.x, 2) + Math.pow(this.circle.y - this.y, 2))
         
@@ -28,8 +32,8 @@ class Rect extends Element
         let x = this.getX()
         let y = this.getY()
         
-        let xPlusMarginX = x + this.object.attrs.width
-        let yPlusMarginY = y + this.object.attrs.height
+        let xPlusMarginX = x + this.width
+        let yPlusMarginY = y + this.height
         
         let points = 
         [
@@ -48,7 +52,7 @@ class Rect extends Element
     }
     getRightPointX()
     {
-        return this.getX() + this.object.attrs.width
+        return this.getX() + this.width
     }
     getLeftPointX()
     {
@@ -60,8 +64,43 @@ class Rect extends Element
     }
     delete(indexInArray, array)
     {
-        array[indexInArray].object.destroy()
-        array[indexInArray + 1].object.destroy() //rects идут парами
         array.splice(indexInArray, 2)
     }
+    draw()
+    {
+        ctx.fillStyle   = this.fill
+        ctx.strokeStyle = this.stroke
+        
+        ctx.strokeRect(this.x, this.y, this.width, this.height) 
+        ctx.fillRect(this.x, this.y, this.width, this.height)
+    }
+}
+const rectWidth = 0.05 * width
+const rectIndent = 0.3 * width
+
+function generateRect(x)
+{
+    const wayHeight = 0.3 * height
+    let rectHeight = random(0, height - sides[1].height - sides[0].height - wayHeight)
+    
+    let rectModel = 
+    {
+        x: x, 
+        y: sides[0].height, 
+        width: rectWidth,
+        height: rectHeight
+    }
+    
+    elements.push(new Rect(createRectByModel(rectModel)))
+    
+    
+    
+    
+    rectModel.y += rectHeight + wayHeight
+    rectModel.height = height - rectModel.y - sides[1].height
+
+    elements.push(new Rect(createRectByModel(rectModel)))
+    
+    const generatedElementsNumber = 2
+    return generatedElementsNumber
 }

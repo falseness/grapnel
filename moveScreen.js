@@ -15,11 +15,11 @@ class Screen
     }
     move()
     {
-        for (let i = sides.length; i < sprites.length; ++i)
+        for (let i = sides.length; i < elements.length; ++i)
         {
-            sprites[i].moveX(this.speed)
+            elements[i].moveX(this.speed)
             
-            sprites[i].moveY() // оптимизация
+            elements[i].moveY() // оптимизация
         }
         
         ninja.x += this.speed

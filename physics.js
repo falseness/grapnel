@@ -9,9 +9,9 @@ function physics()
     else 
     {
         //moveY есть в screen.move() для оптимизации, поэтому else
-        for (let i = sides.length; i < sprites.length; ++i)
+        for (let i = sides.length; i < elements.length; ++i)
         {
-            sprites[i].moveY()
+            elements[i].moveY()
         }
     }
     

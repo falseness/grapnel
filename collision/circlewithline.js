@@ -42,8 +42,8 @@ function collisionCircleWithVertical(coord0, coordUnknow0, r, vertical)
         let root1 = (coordUnknow02 - D) / 2
         let root2 = (coordUnknow02 + D) / 2
         {
-            if (vertical.y2 <= root1 && root1 <= vertical.y1
-               || vertical.y2 <= root2 && root2 <= vertical.y1)
+            if (pointOnLine(root1, vertical.y1, vertical.y2)
+               || pointOnLine(root2, vertical.y1, vertical.y2))
                 return true
         }
     }
