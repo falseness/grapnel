@@ -151,7 +151,7 @@ class Grapnel
             ctx.lineTo(ninja.x, ninja.y)
             ctx.strokeStyle = this.stroke
             
-            const strokeWidth = 4
+            const strokeWidth = Math.round(0.006 * height)
             ctx.lineWidth = strokeWidth
             ctx.stroke()
             ctx.lineWidth = 1
