@@ -5,8 +5,9 @@ class Triangle extends Element
         super(object)
     
         this.speedY =   0.005 * height
-        this.side   =   this.object.attrs.radius * Math.sqrt(3)
+        this.side   =   object.radius * Math.sqrt(3)
         this.height =   this.side * Math.sin(Math.PI / 3)
+        this.radius = object.radius
         
         let points = this.getPoints()
         
@@ -20,7 +21,7 @@ class Triangle extends Element
     }
     getCircumscribedCircle()
     {
-        return {x: this.x, y: this.y, radius: this.object.attrs.radius}
+        return {x: this.x, y: this.y, radius: this.radius}
     }
     moveY()
     {
@@ -72,9 +73,22 @@ class Triangle extends Element
         if (this.getTopPointY() < triangleRestriction.top || this.getBottomPointY() > triangleRestriction.bottom)
             this.speedY *= -1
     }
-    moveObjectY()
+    draw()
     {
-        this.object.setY(this.getY())
+        ctx.beginPath()
+        
+        ctx.moveTo(this.lines[0].x1, this.lines[0].y1)
+        for (let i = 1; i < this.lines.length; ++i)
+        {
+            ctx.lineTo(this.lines[i].x1, this.lines[i].y1)
+        }
+        ctx.lineTo(this.lines[0].x1, this.lines[0].y1)
+        
+        ctx.fillStyle   = this.fill
+        ctx.fill()
+        
+        ctx.strokeStyle = this.stroke
+        ctx.stroke()
     }
 }
 const radius = height * 0.15 / Math.sqrt(3)
@@ -83,22 +97,9 @@ const triangleRestriction =
     top: sides[0].y + sides[0].height + 0.01 * height,
     bottom: sides[1].y - 0.01 * height
 }
-/*function generateTrianglePoints(x, y)
-{
-    const pointsRectangleTemplate = [0, 0, -length * Math.sin(Math.PI / 6), -length * Math.cos(Math.PI / 6),
-                                     length * Math.sin(Math.PI / 6), -length * Math.cos(Math.PI / 6)]
-    
-    res = []
-    for (let i = 0; i < pointsRectangleTemplate.length; i += 2)
-    {
-        res.push(pointsRectangleTemplate[i] + x)
-        res.push(pointsRectangleTemplate[i + 1] + y)
-    }
-    return res
-}*/
+
 function generateTriangle(x)
 {    
-    
     
     let model = 
     {
