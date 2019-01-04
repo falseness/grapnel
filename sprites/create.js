@@ -30,6 +30,21 @@ let sides =
         height: 0.1 * height
     }
 ]
+let area = 
+[
+    {
+        x: -width, 
+        y: 0, 
+        width: 3 * width, 
+        height: 0.1 * height
+    },
+    {
+        x: -width, 
+        y: 0.9 * height, 
+        width: 3 * width,
+        height: 0.1 * height
+    }
+]
 for (let i = 0; i < sides.length; ++i)
 {
     const sidesColor = '#f0f0f0'

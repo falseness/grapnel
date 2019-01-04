@@ -4,7 +4,8 @@ class Trampoline extends Element
     {
         super(object)
         
-        this.x = 0
+        this.x = object.x
+        this.y = object.y
         
         this.circle = 
         {
@@ -12,72 +13,56 @@ class Trampoline extends Element
             y: 0
         }
         
-        this.rightPointX    = object.points[0]
-        this.leftPointX     = object.points[0]
+        this.points         = object.points.slice()
+        this.rightPointX    = object.points[0].x
+        this.leftPointX     = object.points[0].x
         
         for (let i = 0; i < object.points.length; i += 2)
         {
-            if (object.points[i] > this.rightPointX)
-                this.rightPointX = object.points[i]
-            if (object.points[i] < this.leftPointX)
-                this.leftPointX = object.points[i]
+            if (object.points[i].x > this.rightPointX)
+                this.rightPointX = object.points[i].x
+            if (object.points[i].x < this.leftPointX)
+                this.leftPointX = object.points[i].x
             
-            this.circle.x += object.points[i]
-            this.circle.y += object.points[i + 1]
+            this.circle.x += object.points[i].x
+            this.circle.y += object.points[i].y
         }
         
-        this.circle.x /= (object.points.length / 2)
-        this.circle.y /= (object.points.length / 2)
+        this.circle.x /= (object.points.length)
+        this.circle.y /= (object.points.length)
         
         let r = 0
-        for (let i = 0; i < object.points.length; i += 2)
+        for (let i = 0; i < object.points.length; ++i)
         {
-            let t = Math.pow(object.points[i] - this.circle.x, 2) +
-                    Math.pow(object.points[i + 1] - this.circle.y, 2)
+            let t = Math.pow(object.points[i].x - this.circle.x, 2) +
+                    Math.pow(object.points[i].y - this.circle.y, 2)
             if (t > r)
                 r = t
         }
         this.circle.radius = Math.sqrt(r)
-        
-        this.lines = [lineFormula(object.points[object.points.length - 2],
-                                    object.points[object.points.length - 1],
-                                    object.points[0], object.points[1])]
-        for (let i = 0; i <= object.points.length - 4; i += 2)
-        {
-            this.lines.push(lineFormula(object.points[i], object.points[i + 1],
-                            object.points[i + 2], object.points[i + 3]))
-        }
-    }
-    getX()
-    {
-        return this.lines[0].x1
     }
     getCircumscribedCircle()
     {
-        return this.circle
+        return {x: this.x + this.circle.x, y: this.y + this.circle.y, radius: this.circle.radius}
     }
     getRightPointX()
     {
-        return this.rightPointX
+        return this.x + this.rightPointX
     }
     getLeftPointX()
     {
-        return this.leftPointX
+        return this.x + this.leftPointX
     }
     getPoints()
     {
         let res = []
-        for (let i = 0; i < this.lines.length; ++i)
-            res.push(this.lines[i].x1, this.lines[i].y1)
+        for (let i = 0; i < this.points.length; ++i)
+            res.push({x: this.points[i].x + this.x, y: this.points[i].y + this.y})
         return res
     }
     moveX(speed)
     {
         super.moveX(speed)
-        
-        this.rightPointX    += speed
-        this.leftPointX     += speed
-        this.circle.x       += speed
     }
     collision(who, line)
     {
@@ -108,25 +93,8 @@ class Trampoline extends Element
         else
             console.log('collision with trampoline error')
     }
-    draw()
-    {
-        ctx.beginPath()
-        
-        ctx.moveTo(this.lines[0].x1, this.lines[0].y1)
-        for (let i = 1; i < this.lines.length; ++i)
-        {
-            ctx.lineTo(this.lines[i].x1, this.lines[i].y1)
-        }
-        ctx.lineTo(this.lines[0].x1, this.lines[0].y1)
-        
-        ctx.fillStyle   = this.fill
-        ctx.fill()
-        
-        ctx.strokeStyle = this.stroke
-        ctx.stroke()
-    }
 }
-function generateTrampolinePoints(x)
+function generateTrampolinePoints()
 {
     const trampolineRestriction = 
     {
@@ -142,30 +110,27 @@ function generateTrampolinePoints(x)
         }
     }
     
-    let x2 = x + random(trampolineRestriction.width.min, trampolineRestriction.width.max)
+    let x2 = random(trampolineRestriction.width.min, trampolineRestriction.width.max)
     
-    const chanceBottomTrampoline = 98
-    let _case = (random() < chanceBottomTrampoline)?1:0
-    let y1 = sides[_case].y
-    let ratio = -1
+    let res = 
+    [
+        {x: 0,  y: 0                                                                            }, 
+        {x: 0,  y: -random(trampolineRestriction.height.min, trampolineRestriction.height.max)  },
+        {x: x2, y: -random(trampolineRestriction.height.min, trampolineRestriction.height.max)  },
+        {x: x2, y: 0                                                                            }
+    ]
     
-    if (!_case)
-    {
-        ratio = 1
-        y1 += sides[_case].height
-    }
+    return res
     
-    return [x, y1, x, 
-            y1 + ratio * random(trampolineRestriction.height.min, trampolineRestriction.height.max),
-            x2, y1 + ratio * random(trampolineRestriction.height.min, trampolineRestriction.height.max),
-            x2, y1]
 }
 function generateTrampoline(x)
 {
     trampolineModel = 
     {
-            points: generateTrampolinePoints(x)
+        points: generateTrampolinePoints()
     }
+    trampolineModel.x = x
+    trampolineModel.y = area[1].y
     elements.push(new Trampoline(createLineByModel(trampolineModel)))
     
     const generatedElementsNumber = 1

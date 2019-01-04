@@ -6,8 +6,10 @@ function createLineByModel(model)
 
     object =
     {
-        points: model.points            ,
-        fill:   model.color             ,
+        x: model.x                  ,
+        y: model.y                  ,
+        points: model.points        ,
+        fill:   model.color         ,
         stroke: model.strokeColor       
     }
     return object

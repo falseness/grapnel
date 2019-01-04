@@ -3,7 +3,7 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     grapnel.draw()
     ninja.draw()
-    
+
     for (let i = sides.length; i < elements.length; ++i)
     {
         elements[i].draw()

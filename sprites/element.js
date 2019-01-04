@@ -15,33 +15,13 @@ class Element
     {
         
     }
-    hide()
+    moveX(speed)
     {
-        this.object.hide()
-    }
-    show()
-    {
-        this.object.show()
+        this.x += speed
     }
     isToRightThanEdgeOfScreen()
     {
         return this.getLeftPointX() > width
-    }
-    moveX(speed)
-    {
-        this.x += speed
-        
-        this.moveLinesX(speed)
-    }
-    moveLinesX(speed)
-    {
-        for (let i = 0; i < this.lines.length; ++i)
-        {
-            this.lines[i].x1        += speed
-            this.lines[i].x2        += speed
-            this.lines[i].circle.x  += speed
-            this.lines[i].b         -= speed * this.lines[i].k
-        }
     }
     getX()
     {
@@ -53,7 +33,16 @@ class Element
     }
     getLines()
     {
-        return this.lines
+        let points = this.getPoints()
+        let res = []
+        for (let i = 1; i < points.length; ++i)
+        {
+            res.push(lineFormula(points[i - 1].x, points[i - 1].y, points[i].x, points[i].y))
+        }
+        
+        res.push(lineFormula(points[points.length - 1].x, points[points.length - 1].y, points[0].x, points[0].y))
+        
+        return res
     }
     collision()
     {
@@ -70,5 +59,24 @@ class Element
     delete(indexInArray, array)
     {
         array.splice(indexInArray, 1)
+    }
+    draw()
+    {
+        ctx.beginPath()
+        
+        let points = this.getPoints()
+        ctx.moveTo(points[points.length - 1].x, points[points.length - 1].y)
+        for (let i = 0; i < points.length; ++i)
+        {
+            ctx.lineTo(points[i].x, points[i].y)
+        }
+        
+        ctx.fillStyle   = this.fill
+        ctx.fill()
+        
+        ctx.strokeStyle = this.stroke
+        ctx.stroke()
+        
+        ctx.closePath()
     }
 }

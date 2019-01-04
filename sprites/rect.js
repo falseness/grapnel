@@ -9,23 +9,14 @@ class Rect extends Element
         
         this.circle =
         {
-            x: this.x + this.width  / 2,
-            y: this.y + this.height / 2
+            x: this.width  / 2,
+            y: this.height / 2
         }
         this.circle.radius = Math.sqrt(Math.pow(this.circle.x - this.x, 2) + Math.pow(this.circle.y - this.y, 2))
-        
-        
-        let points = this.getPoints()
-        this.lines = [lineFormula(points[points.length - 2], 
-                                    points[points.length - 1], points[0], points[1])]
-        for (let i = 0; i <= points.length - 4; i += 2)
-        {
-            this.lines.push(lineFormula(points[i], points[i + 1], points[i + 2], points[i + 3]))
-        }
     }
     getCircumscribedCircle()
     {
-        return this.circle
+        return {x: this.circle.x + this.x, y: this.circle.y + this.y, radius: this.circle.radius}
     }
     getPoints()
     {   
@@ -37,10 +28,10 @@ class Rect extends Element
         
         let points = 
         [
-            x           ,       y           ,
-            xPlusMarginX,       y           ,
-            xPlusMarginX,       yPlusMarginY,
-            x           ,       yPlusMarginY
+            {x: x           , y: y              },
+            {x: xPlusMarginX, y: y              },
+            {x: xPlusMarginX, y: yPlusMarginY   },
+            {x: x           , y: yPlusMarginY   }
         ]
         
         return points
@@ -48,7 +39,6 @@ class Rect extends Element
     moveX(speed)
     {
         super.moveX(speed)
-        this.circle.x += speed
     }
     getRightPointX()
     {
@@ -81,7 +71,7 @@ const rectIndent = 0.3 * width
 function generateRect(x)
 {
     const wayHeight = 0.3 * height
-    let rectHeight = random(0, height - sides[1].height - sides[0].height - wayHeight)
+    let rectHeight = random(0, height - area[1].height - area[0].height - wayHeight)
     
     let rectModel = 
     {
@@ -97,7 +87,7 @@ function generateRect(x)
     
     
     rectModel.y += rectHeight + wayHeight
-    rectModel.height = height - rectModel.y - sides[1].height
+    rectModel.height = height - rectModel.y - area[1].height
 
     elements.push(new Rect(createRectByModel(rectModel)))
     
